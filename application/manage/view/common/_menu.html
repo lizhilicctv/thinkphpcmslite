@@ -1,0 +1,27 @@
+<aside class="Hui-aside">
+	{volist name="pilot_list" id="vo"}
+	<div class="menu_dropdown bk_2">
+		{volist name="vo" id="vo1"}
+		<dl >
+			<?php if(count($vo1['zi']) > 0){ ?>
+				<dt><i class="icon Hui-iconfont">{$vo1.icon|raw}</i> {$vo1.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+				<dd>
+					<ul>
+						{volist name="vo1.zi" id="vo2"}
+						<li>
+							<a data-href="/manage.php/{$vo2.url|raw}" data-title="{$vo2.name}" href="javascript:void(0)">{$vo2.name}</a>
+						</li>
+						{/volist}
+					</ul>
+				</dd>
+			<?php }else{ ?>
+				<dt><a data-href="/manage.php/{$vo1.url|raw}" data-title="{$vo1.name}" href="javascript:void(0)"><i class="Hui-iconfont">{$vo1.icon|raw}</i> {$vo1.name}</a></dt>
+			<?php }?>
+		</dl>
+		{/volist}
+	</div>
+	{/volist}
+</aside>
+<div class="dislpayArrow hidden-xs">
+	<a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
+</div>

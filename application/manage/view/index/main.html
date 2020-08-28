@@ -1,0 +1,86 @@
+{include file="common/_meta" /}
+<title>我的桌面</title>
+<meta name="keywords" content="李志立，lizhilimaster@163.com">
+<meta name="description" content="李志立，lizhilimaster@163.com">
+</head>
+<body>
+	<div class="page-container">
+		<p class="f-20 text-success">欢迎使用<b>后台管理系统</b> <span class="f-14">正式版 v1.4</span>！</p>
+		<p>登录次数：{$count1} </p>
+		<p>本次登录IP：{$log.ip} 本次登录时间：{$log.create_time|date="Y-m-d H:i:s"}</p>
+		<table class="table table-border table-bordered table-bg">
+			<thead>
+				<tr>
+					<th colspan="7" scope="col">信息统计</th>
+				</tr>
+				<tr class="text-c">
+					<th>统计</th>
+					<th>资讯库</th>
+					<th>留言反馈</th>
+					<th>会员</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-c">
+					<td>总数</td>
+					<td>{$w['zong']}</td>
+					<td>{$liu['zong']}</td>
+					<td>{$yong['zong']}</td>
+				</tr>
+				<tr class="text-c">
+					<td>今日</td>
+					<td>{$w['jin']}</td>
+					<td>{$liu['jin']}</td>
+					<td>{$yong['jin']}</td>
+				</tr>
+				<tr class="text-c">
+					<td>昨日</td>
+					<td>{$w['zuo']}</td>
+					<td>{$liu['zuo']}</td>
+					<td>{$yong['zuo']}</td>
+				</tr>
+				<tr class="text-c">
+					<td>本周</td>
+					<td>{$w['zhou']}</td>
+					<td>{$liu['zhou']}</td>
+					<td>{$yong['zhou']}</td>
+				</tr>
+				<tr class="text-c">
+					<td>本月</td>
+					<td>{$w['yue']}</td>
+					<td>{$liu['yue']}</td>
+					<td>{$yong['yue']}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table table-border table-bordered table-bg mt-20">
+			<div id="bang">
+				<h2>使用说明</h2>
+				{$cms.text|raw}
+				{if $cms.iswo==1}
+				<p class="red">注：扫描二维码，可以添加解决疑问专家的QQ/微信，添加好友时请您写明疑问，以便解决您的问题</p>
+				<div class="fen">
+					<span>疑问QQ群：99078439</span>
+					<a href="mailto:lizhilimaster@163.com">发送邮件：lizhilimaster@163.com</a>
+					<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=d0eb332edc6d7702e82852e29fd39e065ee75aa4f828adc992b931b9817f2254"><img
+						 border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="河北网站技术交流" title="河北网站技术交流"></a>
+					<img style="CURSOR: pointer" onclick="javascript:window.open('tencent://message/?uin=821642832&Site=www.linglukeji.com&Menu=yes', '_blank', 'height=502, width=644,toolbar=no,scrollbars=no,menubar=no,status=no');"
+					 border="0" SRC=http://wpa.qq.com/pa?p=1:821642832:1 alt="点击这里给我发消息">
+				</div>
+				<div class="frame-img"> <img src="/static/manage/qqimg.jpg" width="130"><img src="/static/manage/weixinimg.jpg"
+					 width="130"><img src="/static/manage/qqqun.jpg" width="130"></div>
+				{/if}
+			</div>
+
+		</table>
+	</div>
+	<footer class="footer mt-20">
+		<div class="container">
+			<p>感谢hui0、jQuery、layer、laypage、Validform、UEditor、My97DatePicker、iconfont、Datatables、WebUploaded、icheck、highcharts、bootstrap-Switch提供技术支持<br>
+				Copyright &copy;2015-2019 河北标天计算机 All Rights Reserved.<br>
+				本后台系统由<a href="http://www.biaotian.net/" target="_blank" title="河北标天计算机">河北标天计算机</a>提供技术支持</p>
+		</div>
+	</footer>
+	{include file="common/_footer" /}
+</body>
+</html>

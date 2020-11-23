@@ -15,7 +15,7 @@
 						<span class="c-red">*</span>
 						中文名称：</label>
 					<div class="formControls col-xs-8 col-sm-9">
-						<input type="text" class="input-text" value="{$data.cnname}" <?php if($data['st'] == '1'){ echo 'disabled'; }?>  placeholder="" id="cnname" name="cnname">
+						<input type="text" class="input-text" onKeyUp="zhuan()"  value="{$data.cnname}" <?php if($data['st'] == '1'){ echo 'disabled'; }?>  placeholder="" id="cnname" name="cnname">
 					</div>
 					<div class="col-3">
 					</div>
@@ -82,6 +82,7 @@
 <script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__MANAGE__lib/function.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('.skin-minimal input').iCheck({
@@ -119,6 +120,9 @@ function textlength(){
 		$('.textarea-length').text(nmb);
 	}
 }
+function zhuan(){
+			$('#enname').val(getPinYinByName($('#cnname').val()));    
+		}
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

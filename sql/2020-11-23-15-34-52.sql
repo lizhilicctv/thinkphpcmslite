@@ -2,7 +2,7 @@
 MySQL Database Backup Tools
 Server:127.0.0.1:3306
 Database:thinkphpcmslite_com
-Data:2020-08-28 18:12:17
+Data:2020-11-23 15:34:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -315,14 +315,13 @@ CREATE TABLE `lizhili_log` (
   `ip` char(15) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lizhili_log
 -- ----------------------------
 
-INSERT INTO `lizhili_log` (`id`,`username`,`ip`,`create_time`) VALUES ('1','admin','127.0.0.1','1598606271');
-INSERT INTO `lizhili_log` (`id`,`username`,`ip`,`create_time`) VALUES ('2','admin','127.0.0.1','1598609497');
+INSERT INTO `lizhili_log` (`id`,`username`,`ip`,`create_time`) VALUES ('1','admin','127.0.0.1','1606116883');
 
 
 -- ----------------------------
@@ -517,7 +516,7 @@ CREATE TABLE `lizhili_system` (
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lizhili_system

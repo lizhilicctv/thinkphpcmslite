@@ -44,7 +44,7 @@ function boot($data, $time=3000)
     $html.='</div></div>';
     return $html;
     //使用方法
-    //{:boot($ad.index)}
+    //{:boot($ad.index,5000)}
 }
 function SuperSlide($data=null,$time=3000,$autoPlay=true,$next=false){
 	$name='a'.uniqid();

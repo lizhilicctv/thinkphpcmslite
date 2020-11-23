@@ -112,7 +112,8 @@ class System extends Conn
             }
             
             $file = request()->file()['img'];
-            if ($file) {
+            if (isset($file['img'])) {
+				$file=$file['img'];
                 foreach ($system_id as $k=>$v) {
                     $info = $file[$k]->move('system');
                     if ($info) {

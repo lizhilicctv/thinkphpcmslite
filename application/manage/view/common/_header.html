@@ -32,19 +32,16 @@
 						</ul>
 					</li>
 					<?php 
-					$is_comment=false;
-					$is_message=false;
-					$is_ding=false;
-					foreach($pilot_list as $data){
-						foreach($data as $v){
-							
-							if($v['name']== "留言管理"){
-								$is_message=true;
+						$is_comment=false;
+						$is_message=false;
+						$is_ding=false;
+						foreach($pilot_list as $data){
+							foreach($data as $v){
+								if($v['name']== "反馈留言"){
+									$is_message=true;
+								}
 							}
-							
-						}
-					} 
-					// dump($is_ding);
+						} 
 					?>
 					{if $is_comment}
 					<li class="lizhili1" id="Hui-msg">

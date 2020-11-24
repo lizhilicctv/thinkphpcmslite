@@ -60,6 +60,40 @@
 					<div class="col-3">
 					</div>
 				</div>
+				
+				<div class="row cl"  id="catehtml">
+					<label class="form-label col-xs-3 col-sm-2">
+						栏目模版：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span class="select-box">
+						<select name="catehtml" class="select">
+							<option value>默认模版</option>
+							{volist name="html" id="vo"}
+							<option value="{$vo.name}">{$vo.name}</option>
+							{/volist}
+						</select>
+						</span>
+					</div>
+					<div class="col-3">
+					</div>
+				</div>
+				<div class="row cl"  id="showhtml">
+					<label class="form-label col-xs-3 col-sm-2">
+						详情模版：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<span class="select-box">
+						<select name="showhtml" class="select">
+							<option value>默认模版</option>
+							{volist name="html" id="vo"}
+							<option value="{$vo.name}">{$vo.name}</option>
+							{/volist}
+						</select>
+						</span>
+					</div>
+					<div class="col-3">
+					</div>
+				</div>
+				
 				<div class="row cl">
 					<label class="form-label col-xs-3 col-sm-2">
 						栏目关键字：</label>
@@ -79,6 +113,7 @@
 					<div class="col-3">
 					</div>
 				</div>
+				
 				<div class="row cl">
 					<label class="form-label col-xs-3 col-sm-2">栏目描述：</label>
 					<div class="formControls col-xs-8 col-sm-9">
@@ -151,15 +186,21 @@ $(function(){
 		if (this.value== "2"){
 			$('#yin').show();
 			$('#lian').hide();
+			$('#catehtml').show();
+			$('#showhtml').hide();
 			return false;
 		}
 		if (this.value== "4"){
 			$('#yin').hide();
 			$('#lian').show();
+			$('#catehtml').hide();
+			$('#showhtml').hide();
 			return false;
 		}
 		$('#yin').hide();
 		$('#lian').hide();
+		$('#catehtml').show();
+		$('#showhtml').show();
     })
 	
 	var ue = UE.getEditor('danye');

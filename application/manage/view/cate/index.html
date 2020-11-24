@@ -22,6 +22,8 @@
 							<th width="60">栏目名称</th>
 							<th width="60">英文名称</th>
 							<th width="60">栏目类型</th>
+							<th width="60">栏目模版</th>
+							<th width="60">详情模版</th>
 							<th width="80">栏目关键字</th>
 							<th width="180">栏目备注</th>
 							<th width="80">栏目状态</th>
@@ -50,8 +52,10 @@
 									单页
 								{/if}
 							</td>
-							<td>{$vo.keyword}</td>
-							<td>{$vo.mark}</td>
+							<td>{$vo.catehtml|default='没有填写'}</td>
+							<td>{$vo.showhtml|default='没有填写'}</td>
+							<td>{$vo.keyword|default='没有填写'}</td>
+							<td>{$vo.mark|default='没有填写'}</td>
 							<td class="td-status">
 								{switch name="vo.isopen" }
 								{case value="1"}<span class="label label-success radius">展示</span>{/case}

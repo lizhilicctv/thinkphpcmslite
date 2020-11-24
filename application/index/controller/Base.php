@@ -31,6 +31,7 @@ class Base extends Controller
 			}
 		}
 		$this->assign('ad', $ad);
+		
     }
 	
 	

@@ -2,7 +2,7 @@
 MySQL Database Backup Tools
 Server:127.0.0.1:3306
 Database:thinkphpcmslite_com
-Data:2020-11-23 15:34:52
+Data:2020-11-24 17:08:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -97,6 +97,7 @@ CREATE TABLE `lizhili_article` (
   `faid` int(11) DEFAULT '0' COMMENT '发布者id',
   `laiyuan` varchar(255) DEFAULT NULL,
   `click_wai` mediumint(9) DEFAULT '0' COMMENT '展示数据',
+  `isopen` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -226,6 +227,8 @@ CREATE TABLE `lizhili_cate` (
   `create_time` int(11) DEFAULT NULL,
   `isopen` tinyint(1) DEFAULT '1',
   `url` varchar(255) DEFAULT NULL,
+  `catehtml` varchar(255) DEFAULT NULL COMMENT '栏目模版',
+  `showhtml` varchar(255) DEFAULT NULL COMMENT '详情模版',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -315,13 +318,12 @@ CREATE TABLE `lizhili_log` (
   `ip` char(15) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lizhili_log
 -- ----------------------------
 
-INSERT INTO `lizhili_log` (`id`,`username`,`ip`,`create_time`) VALUES ('1','admin','127.0.0.1','1606116883');
 
 
 -- ----------------------------
@@ -490,7 +492,7 @@ CREATE TABLE `lizhili_slide` (
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lizhili_slide

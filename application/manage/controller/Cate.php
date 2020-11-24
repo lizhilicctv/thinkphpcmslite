@@ -92,6 +92,7 @@ class Cate extends Conn
 			if(!$validate->check($data)){
 				$this->error($validate->getError());
 			}	
+
 			$user = new Catemodel($data);
 			$res=$user->save();
 			if($res){
@@ -103,6 +104,19 @@ class Cate extends Conn
 		$cate=new Catemodel();
 		$datasort=$cate->tree();
 		$this->assign('datasort',$datasort);
+		
+		$dir=env('app_path').'index/view/index';
+		$wo=scandir($dir);
+		$html=[];
+		foreach($wo as $k=>$v){
+			if(\is_file($dir.'/'.$v)){
+				$html[]=[
+					'name'=>$v,
+				];
+			}
+		}
+		$this->assign('html',array_reverse($html));
+		
        return $this->fetch();
     }
 	public function edit()
@@ -131,6 +145,17 @@ class Cate extends Conn
 		$cate=new Catemodel();
 		$datasort=$cate->tree();
 		$this->assign('datasort',$datasort);
+		$dir=env('app_path').'index/view/index';
+		$wo=scandir($dir);
+		$html=[];
+		foreach($wo as $k=>$v){
+			if(\is_file($dir.'/'.$v)){
+				$html[]=[
+					'name'=>$v,
+				];
+			}
+		}
+		$this->assign('html',array_reverse($html));
        return $this->fetch();
     }
 }

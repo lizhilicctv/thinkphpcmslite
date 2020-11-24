@@ -111,7 +111,7 @@ class System extends Conn
                 }
             }
             
-            $file = request()->file()['img'];
+            $file = request()->file();
             if (isset($file['img'])) {
 				$file=$file['img'];
                 foreach ($system_id as $k=>$v) {

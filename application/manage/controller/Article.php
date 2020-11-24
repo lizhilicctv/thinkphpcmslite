@@ -72,9 +72,6 @@ class Article extends Conn
                 @unlink(substr($v1, 1));
             }
 			
-			
-			
-			
             if (Db::name('article')->delete($data['id'])) {
                 return 1;//修改成功返回1
             } else {
@@ -126,7 +123,20 @@ class Article extends Conn
 			}
 			
 		}
-		
+		if($data['type']=='article_start'){
+			if(Db::name('article')->where('id',$data['id'])->setField('isopen',1)){
+				return 1;//修改成功返回1
+			}else{
+				return 0;
+			}
+		}
+		if($data['type']=='article_stop'){
+			if(Db::name('article')->where('id',$data['id'])->setField('isopen',0)){
+				return 1;//修改成功返回1
+			}else{
+				return 0;
+			}
+		}
 		
 		
         return 0;
@@ -164,7 +174,7 @@ class Article extends Conn
                             if ($newarr[0] >100 and $newarr[1] >100) {
                                 //图片转移位置
                                 if (!is_dir("uploads/".date("Ymd"))) {
-                                    mkdir("uploads/".date("Ymd"));
+                                    mkdir("uploads/".date("Ymd"),0777,true);
                                 }
                                 $newwei="uploads/".date("Ymd").'/'.basename(substr($v, 1));
                                 $wo=copy(substr($v, 1), $newwei);

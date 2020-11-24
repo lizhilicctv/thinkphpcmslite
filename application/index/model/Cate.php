@@ -13,10 +13,10 @@ class Cate extends Model
 			$order='state desc,time desc,id desc';
 		}
 		if(config('app_debug')){
-			$index_cate=Db::name('article')->where('cateid',$id)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
+			$index_cate=Db::name('article')->where('isopen',1)->where('cateid',$id)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
 		}else{
 			if(!$index_cate=Cache::get('index_cate')){
-				$index_cate=Db::name('article')->where('cateid',$id)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
+				$index_cate=Db::name('article')->where('isopen',1)->where('cateid',$id)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
 				Cache::set('index_cate',$index_cate,3600);
 			}
 		}
@@ -43,7 +43,7 @@ class Cate extends Model
 				}
 				$data=Db::name('cate')->where('fid',$v['id'])->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
 				foreach($data as $k=>$v){
-					$data[$k]['list']=Db::name('article')->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
+					$data[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
 				}
 				$cateall[$k]['zi']=$data;
 			}
@@ -58,7 +58,7 @@ class Cate extends Model
 					}
 					$data=Db::name('cate')->where('fid',$v['id'])->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
 					foreach($data as $k=>$v){
-						$data[$k]['list']=Db::name('article')->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
+						$data[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
 					}
 					$cateall[$k]['zi']=$data;
 				}
@@ -85,7 +85,7 @@ class Cate extends Model
 				}else{
 					$order='state desc,time desc,id desc';
 				}
-				$catelist[$k]['list']=Db::name('article')->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
+				$catelist[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
 			}
 		}else{
 			if(!$catelist=Cache::get('index_cate')){
@@ -96,7 +96,7 @@ class Cate extends Model
 					}else{
 						$order='state desc,time desc,id desc';
 					}
-					$catelist[$k]['list']=Db::name('article')->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
+					$catelist[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
 				}
 				Cache::set('index_cate',$catelist,3600);
 			}
@@ -120,10 +120,10 @@ class Cate extends Model
 			$order='time desc,id desc';
 		}
 		if(config('app_debug')){
-			$index_cate=Db::name('article')->where($where2)->where('state',1)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
+			$index_cate=Db::name('article')->where('isopen',1)->where($where2)->where('state',1)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
 		}else{
 			if(!$index_cate=Cache::get('index_cate')){
-				$index_cate=Db::name('article')->where($where2)->where('state',1)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
+				$index_cate=Db::name('article')->where('isopen',1)->where($where2)->where('state',1)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
 				Cache::set('index_cate',$index_cate,3600);
 			}
 		}
@@ -140,10 +140,56 @@ class Cate extends Model
 			];
 		}
 		if(config('app_debug')){
-			$index_cate=Db::name('article')->where($where2)->where($where)->field($field)->limit($num)->order(true)->select();
+			$index_cate=Db::name('article')->where('isopen',1)->where($where2)->where($where)->field($field)->limit($num)->order(true)->select();
 		}else{
 			if(!$index_cate=Cache::get('index_cate')){
-				$index_cate=Db::name('article')->where($where2)->where($where)->field($field)->limit($num)->order(true)->select();
+				$index_cate=Db::name('article')->where('isopen',1)->where($where2)->where($where)->field($field)->limit($num)->order(true)->select();
+				Cache::set('index_cate',$index_cate,3600);
+			}
+		}
+		
+		return $index_cate;
+	}
+	public function hotimg($id,$num,$offset,$order,$field,$where){
+		if($id==0){
+			$where2=true;
+		}else{
+			$ids=Db::name('cate')->where('fid',$id)->column('id');
+			$ids[]=$id;
+			$where2=[
+				'cateid'=>$ids
+			];
+		}
+		if($order){
+			$order='time desc,id asc';
+		}else{
+			$order='time desc,id desc';
+		}
+		if(config('app_debug')){
+			$index_cate=Db::name('article')->whereNotNull('pic')->where('isopen',1)->where($where2)->where('state',1)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
+		}else{
+			if(!$index_cate=Cache::get('index_cate')){
+				$index_cate=Db::name('article')->whereNotNull('pic')->where('isopen',1)->where($where2)->where('state',1)->where($where)->field($field)->limit($offset,$num)->order($order)->select();
+				Cache::set('index_cate',$index_cate,3600);
+			}
+		}
+		return $index_cate;
+	}
+	public function suiimg($id,$num,$field,$where){
+		if($id==0){
+			$where2=true;
+		}else{
+			$ids=Db::name('cate')->where('fid',$id)->column('id');
+			$ids[]=$id;
+			$where2=[
+				'cateid'=>$ids
+			];
+		}
+		if(config('app_debug')){
+			$index_cate=Db::name('article')->whereNotNull('pic')->where('isopen',1)->where($where2)->where($where)->field($field)->limit($num)->order(true)->select();
+		}else{
+			if(!$index_cate=Cache::get('index_cate')){
+				$index_cate=Db::name('article')->whereNotNull('pic')->where('isopen',1)->where($where2)->where($where)->field($field)->limit($num)->order(true)->select();
 				Cache::set('index_cate',$index_cate,3600);
 			}
 		}
@@ -172,4 +218,19 @@ class Cate extends Model
 		}
 		return array_reverse($cate);
 	}
+	public function lit($id,$unm){
+		if(config('app_debug')){
+			$lit=Db::name('article')->where('isopen',1)->where('cateid',$id)->order('state desc,time desc,id desc')->paginate($unm);
+		}else{
+			if(!$lit=Cache::get('lit')){
+				$lit=Db::name('article')->where('isopen',1)->where('cateid',$id)->order('state desc,time desc,id desc')->paginate($unm);
+				Cache::set('lit',$lit,3600);
+			}
+		}
+		return $lit;
+	}
+	
+	
+	
+	
 }

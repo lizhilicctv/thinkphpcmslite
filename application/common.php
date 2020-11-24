@@ -31,9 +31,57 @@ function jiequ($data, $num=50)
     return mb_substr($data, 0, $num);
 }
 //下面自己编写的方法
-function boot($data, $time=3000)
+//获取幻灯片
+//slide
+function slide()
+{
+    if (config('app_debug')) {
+        $slide=db('slide')->field('title,url,img')->where('isopen',1)->order('sort desc,id desc')->select();
+    } else {
+        if (!$slide=cache('slide')) {
+            $slide=db('slide')->field('title,url,img')->where('isopen',1)->order('sort desc,id desc')->select();
+            cache('slide', $slide, 3600);
+        }
+    }
+    return $slide;
+    // 使用方法
+    // {volist name=":slide()" id="vo"}
+    // {$vo.id}
+    // {/volist}
+}
+//列表页
+function lit($id=0,$num=1){
+	if ($id==0) {
+	    return 'id必须填写！';
+	}
+	$lit=model('cate')->lit($id,$num);
+	return $lit;
+	// 使用方法
+	// {volist name=":lit($id,10)" id="vo"}
+	// {$vo.id}
+	// {/volist}
+	//默认分页
+	//{:lit($id,10)->render()}
+}
+
+function boot($data, $time=3000,$indicators=false,$control=false)
 { //广告幻灯片 利用Bootstrap
-    $html='<div class="carousel slide lizhili_ad" data-ride="carousel" data-interval="'.$time.'"> 	<div class="carousel-inner">';
+	if(!isset($data)){
+		return '';
+	}
+    $html='<div id="carousel-example-generic" class="carousel slide lizhili_ad" data-ride="carousel" data-interval="'.$time.'"> ';
+	if($indicators){
+		$html.=' <ol class="carousel-indicators">';
+				foreach ($data as $k=>$v) {
+				    $html.='<li data-target="#carousel-example-generic" data-slide-to="'.$k.'" ';
+				    if ($k==0) {
+				        $html.='class="active"';
+				    }
+				    $html.=' ></li>';
+				}
+		$html.='  </ol>';
+	}
+	 $html.='<div class="carousel-inner">';
     foreach ($data as $k=>$v) {
         $html.='<div class="item ';
         if ($k==0) {
@@ -41,10 +89,24 @@ function boot($data, $time=3000)
         }
         $html.='">		<a href="'.$v['url'].'" target="_blank"><img src="'.$v['img'].'" /></a>		</div>';
     }
-    $html.='</div></div>';
+    $html.='</div>';
+	if($control){	
+	 $html.=' <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	    <span class="sr-only">Previous</span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    <span class="sr-only">Next</span>
+	  </a>';
+	}
+	$html.='</div>';
     return $html;
-    //使用方法
-    //{:boot($ad.index,5000)}
+    //使用方法,数组，时间，点，上下页
+	//幻灯片 注意一个页面只可以使用一个 幻灯片
+	// {:boot(slide(),5000,true,true)} 
+	
+    //{:boot($ad.index,5000,true,true)}
 }
 function SuperSlide($data=null,$time=3000,$autoPlay=true,$next=false){
 	$name='a'.uniqid();
@@ -94,6 +156,9 @@ EOF;
  //需要提前引入 jq ，
  //参数 广告数据，间隔时间，自动播放，是否显示 上下箭头
  // {:SuperSlide($ad.index,$time=3000,$autoPlay=true,$next=false)}
+ 
+ //幻灯片
+ //{:SuperSlide(slide(),$time=3000,$autoPlay=true,$next=false)} 
 }
 
 function hot($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // 热门文章
@@ -104,15 +169,30 @@ function hot($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // 热�
     // {$vo.id}
     // {/volist}
 }
+function hotimg($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // 热门文章图片
+{ 
+    return model('cate')->hotimg($id, $num,$offset,$order, $field, $where);
+    //使用方法
+    // {volist name=":hotimg($id,$num,$offset,$order,$field,$where)" id="vo"}
+    // {$vo.id}
+    // {/volist}
+}
 function sui($id=0, $num=3,  $field='*', $where=true) //随机读取文章,默认调用两级
 { 
     return model('cate')->sui($id, $num, $field, $where);
     //使用方法
-    // {volist name=":hot($id,$num,$field,$where)" id="vo"}
+    // {volist name=":sui($id,$num,$field,$where)" id="vo"}
     // {$vo.id}
     // {/volist}
 }
-
+function suiimg($id=0, $num=3,  $field='*', $where=true) //随机读取文章,默认调用两级
+{ 
+    return model('cate')->suiimg($id, $num, $field, $where);
+    //使用方法
+    // {volist name=":suiimg($id,$num,$field,$where)" id="vo"}
+    // {$vo.id}
+    // {/volist}
+}
 function cate($id=0, $num=3, $offset=0,$order=false,$field='*', $where=true)
 {
     if ($id==0) {

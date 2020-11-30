@@ -110,55 +110,78 @@ function boot($data, $time=3000,$indicators=false,$control=false)
 }
 function SuperSlide($data=null,$time=3000,$autoPlay=true,$next=false){
 	$name='a'.uniqid();
-	$shu='';
-	foreach ($data as $k=>$v) {
-	    $shu.="<li><a href='".$v['url']."' target='_blank'><img src='".$v['img']."' /></a></li>";
-	}
-	$qian='';
-	if($next){
-		$qian="/* 下面是前/后按钮代码，如果不需要删除即可 */
-			.$name .prev,
-			.$name .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(/static/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
-			.$name .next{ left:auto; right:3%; background-position:8px 5px; }
-			.$name .prev:hover,
-			.$name .next:hover{ filter:alpha(opacity=100);opacity:1;  }
-			.$name .prevStop{ display:none;  }
-			.$name .nextStop{ display:none;  }";
-	}
-	$html=<<<EOF
-	<style type="text/css">
-			/* 本例子css */
-			.$name{ width:100%; height:auto; overflow:hidden; position:relative;}
-			.$name .hd ul li.on{ background:#f00; color:#fff; }
-			.$name .bd{ position:relative; height:100%; z-index:0;   }
-			.$name .bd li{ zoom:1; vertical-align:middle;}
-			.$name .bd img{ width:100%; height:auto; display:block;  }
-			$qian
-			</style>
-			<div class="$name">
-				<div class="bd">
-					<ul>
-						$shu
-					</ul>
+		$shu='';
+		$shudian='';
+		foreach ($data as $k=>$v) {
+		    $shu.="<li><a href='".$v['url']."' target='_blank'><img src='".$v['img']."' /></a></li>";
+			$shudian.="<li>".($k+1)."</li>";
+		}
+		if(!$num){
+			$shudian='';
+		}
+		
+		
+		$qian='';
+		if($next){
+			$qian="/* 下面是前/后按钮代码，如果不需要删除即可 */
+				.$name .prev,
+				.$name .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:32px; height:40px; background:url(/static/slider-arrow.png) -110px 5px no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+				.$name .next{ left:auto; right:3%; background-position:8px 5px; }
+				.$name .prev:hover,
+				.$name .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+				.$name .prevStop{ display:none;  }
+				.$name .nextStop{ display:none;  }";
+		}
+		$dian='';
+		if($num){
+			$dian="
+			.$name  .hd{ height:15px; overflow:hidden; position:absolute; right:5px; bottom:5px; z-index:1; }
+			.$name  .hd ul{ overflow:hidden; zoom:1; float:left;  }
+			.$name .hd ul li{ float:left; margin-right:2px;  width:15px; height:15px; line-height:14px; text-align:center; background:#fff; cursor:pointer; }
+			";
+		}
+		
+		
+		$html=<<<EOF
+		<style type="text/css">
+				/* 本例子css */
+				.$name{ width:100%; height:auto; overflow:hidden; position:relative;}
+				.$name .hd ul li.on{ background:$color; color:#fff; }
+				.$name .bd{ position:relative; height:100%; z-index:0;   }
+				.$name .bd li{ zoom:1; vertical-align:middle;}
+				.$name .bd img{ width:100%; height:auto; display:block;  }
+				$qian
+				$dian
+				</style>
+				<div class="$name">
+					<div class="hd">
+						<ul>
+						$shudian
+						</ul>
+					</div>
+					<div class="bd">
+						<ul>
+							$shu
+						</ul>
+					</div>
+					<!-- 下面是前/后按钮代码，如果不需要删除即可 -->
+					<a class="prev" href="javascript:void(0)"></a>
+					<a class="next" href="javascript:void(0)"></a>
 				</div>
-				<!-- 下面是前/后按钮代码，如果不需要删除即可 -->
-				<a class="prev" href="javascript:void(0)"></a>
-				<a class="next" href="javascript:void(0)"></a>
-			</div>
-			<script src="/static/jquery.SuperSlide.2.1.3.source.js"></script>
-			<script type="text/javascript">
-			jQuery(".$name").slide({mainCell:".bd ul",effect:"leftLoop",autoPlay:$autoPlay,interTime:$time});
-			</script>
+				<script src="/static/jquery.SuperSlide.2.1.3.source.js"></script>
+				<script type="text/javascript">
+				jQuery(".$name").slide({mainCell:".bd ul",effect:"leftLoop",autoPlay:$autoPlay,interTime:$time});
+				</script>
 EOF;
-
- return $html;
- //使用说明
- //需要提前引入 jq ，
- //参数 广告数据，间隔时间，自动播放，是否显示 上下箭头
- // {:SuperSlide($ad.index,$time=3000,$autoPlay=true,$next=false)}
- 
- //幻灯片
- //{:SuperSlide(slide(),$time=3000,$autoPlay=true,$next=false)} 
+	
+	 return $html;
+	 //使用说明
+	 //需要提前引入 jq ，
+	 //参数 广告数据，间隔时间，自动播放，是否显示 上下箭头
+	 // {:SuperSlide($ad.index,$time=3000,$autoPlay=true,$next=false)}
+	 
+	 //幻灯片
+	 //{:SuperSlide(slide(),$time=3000,$autoPlay=true,$next=false)} 
 }
 
 function hot($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // 热门文章

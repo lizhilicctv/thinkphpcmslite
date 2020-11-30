@@ -75,11 +75,34 @@ class Index extends Base
 	}
 	public function show()
 	{
-		$article=Db::name('article')->find(input('id'));
+		$id=input('id');
+		$article=Db::name('article')->find($id);
+		if(!$article){
+			return '文章显示错误！';
+		}
 		Db::name('article')->where('id',$article['id'])->update([
 			'click_wai'=>$article['click_wai']+1,
 			'click'=>$article['click']+1,
 		]);
+		
+		$shang=Db::name('article')->where('id','<',$id)->where('cateid',$article['cateid'])->order('id desc')->find();
+		if($shang){
+			$shang="< a href='".url('index/show',['id'=>$shang['id']])."'>".$shang['title']."</ a>";
+		}else{
+			$shang="< a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+		}
+		$xia=Db::name('article')->where('id','>',$id)->where('cateid',$article['cateid'])->order('id asc')->find();
+		if($xia){
+			$xia="< a href='".url('index/show',['id'=>$xia['id']])."'>".$xia['title']."</ a>";
+		}else{
+			$xia="< a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+		}
+		$this->assign([
+			'shang'=>$shang,
+			'xia'=>$xia
+		]);
+		
+		
 		$html=Db::name('cate')->where('id',$article['cateid'])->value('showhtml');
 		if(substr($html,-5,5)=='.html'){
 			$html=substr($html,0,strlen($html)-5);

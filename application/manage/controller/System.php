@@ -101,7 +101,7 @@ class System extends Conn
             if(!empty($data["redirect"]) and substr($data["redirect"],0,4) != 'http'){
                 return  $this->success('重定向网址不正确！');
             }
-
+			$system_id=[];
             $arrid=Db::name('system')->where('type', 4)->column('id');
             if (isset($_FILES['img']["name"])) {
                 foreach ($_FILES['img']["name"] as $k=>$v) {

@@ -200,6 +200,23 @@ function hotimg($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // �
     // {$vo.id}
     // {/volist}
 }
+function rec($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // 推荐文章
+{ 
+    return model('cate')->rec($id, $num,$offset,$order, $field, $where);
+    //使用方法
+    // {volist name=":rec($id,$num,$offset,$order,$field,$where)" id="vo"}
+    // {$vo.id}
+    // {/volist}
+}
+function recimg($id=0,$num=3,$offset=0,$order=false,$field='*',$where=true) // 推荐图文
+{ 
+    return model('cate')->recimg($id, $num,$offset,$order, $field, $where);
+    //使用方法
+    // {volist name=":recimg($id,$num,$offset,$order,$field,$where)" id="vo"}
+    // {$vo.id}
+    // {/volist}
+}
+
 function sui($id=0, $num=3,  $field='*', $where=true) //随机读取文章,默认调用两级
 { 
     return model('cate')->sui($id, $num, $field, $where);

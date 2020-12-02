@@ -15,11 +15,11 @@ return [
     // 服务器地址
     'hostname'        => '127.0.0.1',
     // 数据库名
-    'database'        => 'thinkphpcmslite_com',
+    'database'        => 'thinkphpcmslite',
     // 用户名
-    'username'        => 'thinkphpcmslite_com',
+    'username'        => 'thinkphpcmslite',
     // 密码
-    'password'        => 'thinkphpcmslite_com',
+    'password'        => 'thinkphpcmslite',
     // 端口
     'hostport'        => '',
     // 连接dsn

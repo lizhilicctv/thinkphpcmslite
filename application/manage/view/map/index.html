@@ -1,0 +1,50 @@
+<!--_meta 作为公共模版分离出去-->
+{include file="common/_meta" /}
+<title>基本设置</title>
+<meta name="keywords" content="李志立，lizhilimaster@163.com">
+<meta name="description" content="李志立，lizhilimaster@163.com">
+</head>
+<body>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span>
+		常用配置 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);"
+		 title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+	<div class="Hui-article">
+		<article class="cl pd-20">
+			<form action="" method="post" class="form form-horizontal" enctype="multipart/form-data" id="form-article-add">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						<h3>网站地图</h3>
+					</label>
+					<div class="formControls col-xs-8 col-sm-9" style="text-align: left;line-height: 50px;padding-top: 10px;">
+						Sitemap文件包含的网址不得超过 5 万个，且文件大小不得超过 10 MB <br>
+						<span style="color: red;">360和搜狗 只支持手动提交，请复制网站到站长平台提交。百度支持自动提交和api提交，请自己编写提交。</span> <br>
+						地图网站为：{$sitemap}
+					</div>
+				</div>
+				
+				
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2">
+						
+					</label>
+					<div class="formControls col-xs-8 col-sm-9" style="text-align: left;line-height: 50px;padding-top: 10px;">
+						<a style="color: #31B0D5;font-size: 20px;" target="_blank" href="/sitemap.xml">查看地图</a>
+					</div>
+				</div>
+			</form>
+		</article>
+	</div>
+	<!--_footer 作为公共模版分离出去-->
+	{include file="common/_footer" /}
+	<script type="text/javascript">
+		$(function() {
+			$('.skin-minimal input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+
+		});
+	</script>
+</body>
+</html>

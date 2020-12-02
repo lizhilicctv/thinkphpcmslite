@@ -81,6 +81,13 @@ class Link extends Conn
 			if(!$validate->check($data)){
 				$this->error($validate->getError());
 			}	
+			$file = request()->file();
+			if (isset($file['pic'])) {
+			    $info = $file['pic']->move('link');
+			    $li=strtr($info->getSaveName(), " \ ", " / ");
+			    $data['pic']='/link/'.$li;
+			}
+
 			$link=new Linkmodel();
 			$link->data($data);
 			$res=$link->save();
@@ -101,8 +108,15 @@ class Link extends Conn
 			if(!$validate->check($data)){
 				$this->error($validate->getError());
 			}	
-			$res=$link->save($data,['id' => input('id')]);
 			
+			$file = request()->file();
+			if (isset($file['pic'])) {
+			    $info = $file['pic']->move('link');
+			    $li=strtr($info->getSaveName(), " \ ", " / ");
+			    $data['pic']='/link/'.$li;
+			}
+			
+			$res=$link->save($data,['id' => input('id')]);
 			if($res){
 				return $this->success('修改成功',url('link/index',['st'=>1]));
 			}else{

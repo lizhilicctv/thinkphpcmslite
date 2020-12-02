@@ -3,7 +3,7 @@ namespace app\index\controller;
 
 use app\index\controller\Base;
 use think\Db;
-
+use think\facade\Cache;
 
 class Index extends Base
 {

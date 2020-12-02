@@ -5,7 +5,7 @@
 </head>
 <body>
 	<div class="page-container">
-		<form action="" method="post" class="form form-horizontal" id="form-category-add">
+		<form action="" method="post"  enctype="multipart/form-data"  class="form form-horizontal" id="form-category-add">
 			<div id="tab-category" class="HuiTab">
 				<div class="tabCon">
 					<input type="hidden" name="id" value="{$data.id}" />
@@ -29,6 +29,23 @@
 						<div class="col-3">
 						</div>
 					</div>
+					<div class="row cl wenzhang"  >
+						<label class="form-label col-xs-3 col-sm-2">网站logo：</label>
+						<div class="formControls col-xs-9 col-sm-9">
+							<div class="uploader-thum-container">
+								<a href="javascript:void();" class="btn btn-primary radius"><i class="icon Hui-iconfont">&#xe642;</i> 浏览文件</a>
+								<input type="file" class="input-file" onchange='onpic()' name="pic" id="pic" value="" accept='image/*' style="font-size: 20px;left:0;" /><span
+								 id="sp"></span>
+							</div>
+							<div style="margin-top: 15px;">
+								{if condition="$data.pic != ''"}
+								<img src="{$data.pic}" height="60" style="margin: 20px;" />
+								{else /}
+								<div>暂无缩率图</div>
+								{/if}
+							</div>
+						</div>
+					</div>
 					<div class="row cl">
 						<label class="form-label col-xs-3 col-sm-2">描述：</label>
 						<div class="formControls col-xs-8 col-sm-9">
@@ -49,7 +66,18 @@
 	</div>
 	<!--_footer 作为公共模版分离出去-->
 	{include file="common/_footer" /}
-
+	<style type="text/css">
+		.li123 {
+			line-height: 30px;
+			background: burlywood;
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0 8px;
+		}
+		#abtn,.dtbtn{
+			color: red;
+		}
+	</style>
 	<!--请在下方写此页面业务相关的脚本-->
 	<script type="text/javascript" src="__MANAGE__lib/My97DatePicker/4.8/WdatePicker.js"></script>
 	<script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/jquery.validate.js"></script>
@@ -90,6 +118,11 @@
 				$('#desc').css("background-color","white");
 				$('.textarea-length').text(nmb);
 			}
+		}
+		function onpic() {
+			var file = document.getElementById("pic").files[0];
+			document.getElementById("sp").innerHTML = '您已经选择图片：' + file['name'];
+			document.getElementById("sp").className = 'li123';
 		}
 	</script>
 	<!--/请在上方写此页面业务相关的脚本-->

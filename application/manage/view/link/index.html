@@ -25,6 +25,7 @@
 						<th width="20">ID</th>
 						<th width="20">排序</th>
 						<th width="40">友情链接名称</th>
+						<th width="40">网站logo</th>
 						<th width="100">友情链接地址</th>
 						<th width="100">友情链接备注</th>
 						<th width="10">状态</th>
@@ -37,6 +38,13 @@
 						<td>{$user.id}</td>
 						<td style="width: 15px;"><input type="text" name="{$user.id}" class="input-text lizhi" value="{$user.sort}"></td>
 						<td>{$user.title}</td>
+						<td>
+							{if condition="$user.pic == '' "}
+								暂无缩率图
+							{else /}
+								<img src="{$user.pic}" height="50" />
+							{/if}
+						</td>
 						<td><a href="{$user.linkurl}" target="_blank">{$user.linkurl}</a></td>
 						<td>{$user.desc}</td>
 						<td>

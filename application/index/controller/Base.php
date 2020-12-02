@@ -9,7 +9,6 @@ class Base extends Controller
     //date_default_timezone_set("PRC");
 	public function initialize()
     {
-
 		$base= new Basemodel();
 		//系统配置
 		if(config('app_debug')){

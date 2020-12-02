@@ -94,12 +94,13 @@
 				increaseArea: '20%'
 			});
 
-			function onpic(o) {
-				var file = $(o)[0].files[0].name;
-				$(o).parent().find('.sp').text('您已经选择图片：' + file);
-				$(o).parent().find('.sp').addClass('li123');
-			}
+			
 		});
+		function onpic(o) {
+			var file = $(o)[0].files[0].name;
+			$(o).parent().find('.sp').text('您已经选择图片：' + file);
+			$(o).parent().find('.sp').addClass('li123');
+		}
 	</script>
 </body>
 </html>

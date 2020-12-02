@@ -25,9 +25,9 @@ class Index extends Base
 			if(config('app_debug')){
 				$datacate=Db::name('cate')->find($id);
 			}else{
-				if(!$datacate=Cache::get('datacate')){
+				if(!$datacate=Cache::get('datacate'.$id)){
 					$datacate=Db::name('cate')->find($id);
-					Cache::set('datacate',$datacate,3600);
+					Cache::set('datacate'.$id,$datacate,3600);
 				}
 			}
 			$this->assign('data', $datacate);
@@ -36,9 +36,9 @@ class Index extends Base
 			if(config('app_debug')){
 				$dataarticle=Db::name('article')->find($id);
 			}else{
-				if(!$dataarticle=Cache::get('dataarticle')){
+				if(!$dataarticle=Cache::get('dataarticle'.$id)){
 					$dataarticle=Db::name('article')->find($id);
-					Cache::set('dataarticle',$dataarticle,3600);
+					Cache::set('dataarticle'.$id,$dataarticle,3600);
 				}
 			}
 			$this->assign('data', $dataarticle);

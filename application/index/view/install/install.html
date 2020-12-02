@@ -25,32 +25,34 @@
   <body>
 	 <div class="container" style="margin-top: 80px">
 	 	<div class="jumbotron">
-			<div >
-				<img src="/static/cmslogo.png" >
+			<div style="display: flex;flex-wrap:wrap;justify-content:center;">
+				<img  src="/static/cmslogo.jpg" >
 			</div>
 			
-			<div style="margin-bottom: 25px;">
-				<h3 style="font-weight: 600;">恭喜你环境配置正确，请按如下操作：</h4>
-
-				<h4 style="padding-left: 15px ;">1,修改伪静态</h5>
-				<h4 style="padding-left: 15px ;">2,创建数据库</h5>
-				<h4 style="padding-left: 15px ;">3,导入数据库</h5>
+			<div style="width: 800px;margin: 25px auto 0 auto;">
+				<h3 style="font-weight: 600;">恭喜你环境配置正确，请按如下操作：</h3>
+				<div class="list-group">
+				  <li class="list-group-item">1,修改伪静态</li>
+				  <li class="list-group-item">2,创建数据库</li>
+				  <li class="list-group-item">3,导入数据库</li>
+				</div>
+			
+				<form action=""  method="post">
+				  <div class="form-group">
+					<label for="l1">数据库名称</label>
+					<input type="text" name="database" class="form-control" id="l1" placeholder="请输入数据库名称">
+				  </div>
+				  <div class="form-group">
+					<label for="l2">用户名称</label>
+					<input type="text" name="username" class="form-control" id="l2" placeholder="请输入用户名">
+				  </div>
+				  <div class="form-group">
+					<label for="l3">密码</label>
+					<input type="text" name="password" class="form-control" id="l3" placeholder="请输入密码">
+				  </div>
+				  <button style="width: 100px;" type="submit" class="btn btn-primary">提交</button>
+				</form>
 			</div>
-	 		<form action=""  method="post">
-	 		  <div class="form-group">
-	 		    <label for="l1">数据库名称</label>
-	 		    <input type="text" name="database" class="form-control" id="l1" placeholder="请输入数据库名称">
-	 		  </div>
-	 		  <div class="form-group">
-	 		    <label for="l2">用户名称</label>
-	 		    <input type="text" name="username" class="form-control" id="l2" placeholder="请输入用户名">
-	 		  </div>
-	 		  <div class="form-group">
-	 		    <label for="l3">密码</label>
-	 		    <input type="text" name="password" class="form-control" id="l3" placeholder="请输入密码">
-	 		  </div>
-	 		  <button type="submit" class="btn btn-primary">提交</button>
-	 		</form>
 	 	</div>
 	 </div>
 	 <script type="text/javascript">

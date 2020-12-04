@@ -247,7 +247,7 @@ function cate($id=0, $num=3, $offset=0,$order=false,$field='*', $where=true)
 function cateall($unid=[], $num=3,$order=false,$field='*', $where=true)
 {
     return model('cate')->cateall($unid, $num, $order,$field, $where);
-    //使用方法 //两层循环
+    //使用方法 //两层循环 //第一个是减去操作
     // {volist name=":cateall([]$unid,$num,$order,$field,$where)" id="vo"}
     // {$vo.id}
     // {/volist}
@@ -255,7 +255,7 @@ function cateall($unid=[], $num=3,$order=false,$field='*', $where=true)
 function catelist($unid=[], $num=3,$order=false,$field='*', $where=true)
 {
     return model('cate')->catelist($unid, $num, $order,$field, $where);
-    //使用方法 //平铺展开
+    //使用方法 //平铺展开 //第一个是减去操作
     // {volist name=":catelist([]$unid,$num,$order,$field,$where)" id="vo"}
     // {$vo.id}
     // {/volist}
@@ -322,4 +322,13 @@ function breadcrumb($fen=''){ //面包屑导航
 	return $html;
 	// 使用方法
 	// {:breadcrumb(' > ')} boot默认不需要传值
+}
+//获取下载文件
+function download($idarr=[], $order=false,$field='*', $where=true)
+{
+    return model('cate')->download($idarr, $order,$field, $where);
+    //使用方法
+    // {volist name=":download([]$idarr,$order,$field,$where)" id="vo"}
+    // {$vo.id}
+    // {/volist}
 }

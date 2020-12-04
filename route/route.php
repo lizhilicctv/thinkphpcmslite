@@ -12,6 +12,7 @@
 Route::redirect('manage','/manage.php/login/index.html',302);
 Route::get('show/:id','index/show');
 Route::get('channel/:id','index/cate');
+Route::get('search','index/search');
 Route::get('/','index');
 return [
 

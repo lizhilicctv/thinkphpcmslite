@@ -1,0 +1,250 @@
+<!--_meta 作为公共模版分离出去-->
+{include file="common/_meta" /}
+<title>新增下载 - 资讯管理 </title>
+<meta name="keywords" content="李志立，lizhilimaster@163.com">
+<meta name="description" content="李志立，lizhilimaster@163.com">
+</head>
+<body>
+	<article class="page-container" style="padding-left: 100px !important;">
+		<form class="form form-horizontal" enctype="multipart/form-data" action="" method="post" id="form-article-add">
+			<input type="hidden" name="id" id="id" value="{$data.id}" />
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>下载标题：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<input type="text" class="input-text" value="{$data.title}" placeholder="请输入下载标题" id="title" name="title">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">关键词：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<input type="text" class="input-text" value="{$data.keyword}" placeholder="请输入关键词" id="keyword" name="keyword">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">设置时间：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<input type="text" value="{$data.time|date='Y-m-d H:i:s'}" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="time" placeholder="默认不填写,为真实时间" class="input-text Wdate">
+				</div>
+			</div>
+			<div class="row cl wenzhang">
+				<label class="form-label col-xs-3 col-sm-2" >下载摘要：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<textarea name="desc" id="desc" rows="" class="textarea" placeholder="说点什么...100个字符以内" datatype="*10-100"
+					 dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textlength()">{$data.desc}</textarea>
+					<p class="textarea-numberbar"><em class="textarea-length">{$data.desc|mb_strlen}</em>/100</p>
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">展示数据：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<input type="number" class="input-text" value="{$data.click_wai}" placeholder=""  name="click_wai" style="width: 30%;"> 
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">下载来源：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<input type="text" class="input-text" value="{$data.laiyuan}" placeholder=""  name="laiyuan">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">下载作者：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<input type="text" class="input-text" value="{$data.author}" placeholder="" id="author" name="author">
+				</div>
+			</div>
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">设为推荐：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<div class="switch" data-on-label="开" data-off-label="关">
+						{if condition="$data.state == 1"}
+						<input type="checkbox" checked="checked" name="state" />
+						{else /}
+						<input type="checkbox" name="state" />
+						{/if}
+					</div>
+				</div>
+			</div>
+
+			<div class="row cl wenzhang"  >
+				<label class="form-label col-xs-3 col-sm-2">缩略图：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<div class="uploader-thum-container">
+						<a href="javascript:void();" class="btn btn-primary radius"><i class="icon Hui-iconfont">&#xe642;</i> 浏览文件</a>
+						<input type="file" class="input-file" onchange='onpic()' name="pic" id="pic" value="" accept='image/*' style="font-size: 20px;left:0;" /><span
+						  class="sp"></span>
+					</div>
+					<div style="margin-top: 15px;">
+						{if condition="$data.pic != ''"}
+						<img src="{$data.pic}" height="60" style="margin: 20px;" />
+						{else /}
+						<div>暂无缩率图</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+			<div class="row cl wenzhang">
+				<label class="form-label col-xs-3 col-sm-2"><span class="c-red">*</span>上传附件：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<div class="uploader-thum-container">
+						<a href="javascript:void();" class="btn btn-primary radius"><i class="icon Hui-iconfont">&#xe642;</i> 浏览文件</a>
+						<input type="file" class="input-file" onchange='onpic(this)' name="file"  value="" accept='*/*' style="font-size: 20px;left:0;" /><span
+						 class="sp"></span>
+					</div>
+					<div style="margin-top: 15px;margin-left: 10px;">
+						{if condition="$data.file != ''"}
+						<a class="btn btn-warning radius" target="_blank" href="{$data.file}">点击打开文件</a>
+						{else /}
+						<div>暂无文件</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+
+			<div class="row cl">
+				<label class="form-label col-xs-3 col-sm-2">下载内容：</label>
+				<div class="formControls col-xs-9 col-sm-9">
+					<script id="editor" name='text' type="text/plain" style="width:100%;height:400px;">{$data.text|raw}</script>
+				</div>
+			</div>
+			<div class="row cl">
+				<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+					<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i>&nbsp;&nbsp;提交</button>
+				</div>
+			</div>
+		</form>
+	</article>
+
+	<!--_footer 作为公共模版分离出去-->
+	{include file="common/_footer" /}
+	<style type="text/css">
+		.li123 {
+			line-height: 30px;
+			background: burlywood;
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0 8px;
+		}
+		#abtn,.dtbtn{
+			color: red;
+		}
+	</style>
+	<script type="text/javascript" src="__MANAGE__lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/validate-methods.js"></script>
+	<script type="text/javascript" src="__MANAGE__lib/jquery.validation/1.14.0/messages_zh.js"></script>
+	<script type="text/javascript" src="__MANAGE__lib/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__MANAGE__lib/ueditor/ueditor.all.min.js"> </script>
+	<script type="text/javascript" src="__MANAGE__lib/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('.skin-minimal input').iCheck({
+				checkboxClass: 'icheckbox-blue',
+				radioClass: 'iradio-blue',
+				increaseArea: '20%'
+			});
+
+			$("#form-article-add").validate({
+				rules: {
+					title: {
+						required: true,
+					},
+				}
+			});
+			var ue = UE.getEditor('editor');
+			//获取默认栏目值
+			if(!!$('#cate').val()){
+			   $.post(
+				"{:url('article/ajax')}",
+			   {
+				id:$('#cate').val(),
+				type:'cate_article',
+			   },
+			   function(result){
+				if(result==1){
+					$('.tupian').hide();
+					$('.wenzhang').show();
+				}else if(result==3){
+					$('.tupian').show();
+					$('.wenzhang').hide();
+				}
+				  
+			   });	
+			}
+		});
+		
+		$("#cate").change(function () {
+		   if(!!$(this).val()){
+			   $.post(
+			   	"{:url('article/ajax')}",
+			   {
+			   	id:$(this).val(),
+			   	type:'cate_article',
+			   },
+			   function(result){
+			   	if(result==1){
+					$('.tupian').hide();
+					$('.wenzhang').show();
+				}else if(result==3){
+					$('.tupian').show();
+					$('.wenzhang').hide();
+				}
+			   });	
+		   }
+		})
+		function adddtrow(o,id){
+		    var div=$(o).parent().parent();
+		    if($(o).html() == '【+】'){
+		        var newdiv=div.clone();    
+		        newdiv.find('.dtbtn').html('【-】');
+				newdiv.find('input').val('');
+				newdiv.find('.sp1').html('');
+		        div.before(newdiv);
+		    }else{
+				
+				if(div.find('img').length >0){
+					layer.confirm('确认要删除图片吗？', function(index) {
+						$.post(
+							"{:url('article/ajax')}", {
+								id: id,
+								type: 'article_del_img',
+							},
+							function(result) {
+								if (result === 1) {
+									div.remove()
+									layer.msg('删除成功!', {
+										icon: 1,
+										time: 1000
+									});
+								} else {
+									layer.msg('删除失败!', {
+										icon: 5,
+										time: 1000
+									});
+								}
+							});
+					});
+				}else{
+				div.remove()	
+				}
+				
+				
+		       
+		    }
+		}
+		function textlength() {
+			var nmb = $('#desc').val().length;
+			$('.textarea-length').text(nmb);
+			if (nmb > 200) {
+				$('#desc').css("background-color", "orangered");
+			} else {
+				$('#desc').css("background-color", "white");
+			}
+		}
+		function onpic(e) {
+			$(e).parent().find('.sp').html(e.files[0].name).addClass('li123');
+			//获取当前的值
+		}
+	</script>
+	<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

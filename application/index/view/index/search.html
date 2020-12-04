@@ -18,8 +18,21 @@
     <![endif]-->
   </head>
   <body>
+	  
+
+	 
 	 <div class="container" style="margin-top: 80px">
-	 	详情页
+		<h3>搜索关键字 {$key ?? '没有填写'}</h2>
+		<h3>栏目名称   {$catename}</h2>
+		<div>
+			<ul>
+			{volist name='list' id='user'}
+				<li> {$user.nickname}</li>
+			{/volist}
+			</ul>
+		</div>
+		{$page|raw}
+		
 	 </div>
     <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>

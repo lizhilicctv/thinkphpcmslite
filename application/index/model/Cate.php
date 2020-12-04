@@ -281,7 +281,19 @@ class Cate extends Model
 		return $lit;
 	}
 	
-	
+	public function download($idarr, $order,$field, $where){
+		if(!is_array($idarr)){
+			return 'id 必须为数组！';
+		}
+		
+		if($order){
+			$order='state desc,time desc,id asc';
+		}else{
+			$order='state desc,time desc,id desc';
+		}
+		$download=Db::name('download')->where('isopen',1)->where('id','in',$idarr)->where($where)->order($order)->field($field)->select();
+		return $download;
+	}
 	
 	
 }

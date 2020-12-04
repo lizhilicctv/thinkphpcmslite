@@ -50,11 +50,8 @@ class Index extends Base
 		if($action=='cate'){
 			$cateid = $id;
 		}
-		
 		$this->assign('cateid', $cateid);
 	}
-	
-	
     public function index()
     {
 		//这里请使用缓存
@@ -72,6 +69,29 @@ class Index extends Base
 		}else{
 			return $this->fetch();
 		}
+	}
+	public function search()
+	{
+		$key=input('key');
+		$cateid=input('cateid');
+		$num=input('num') ?? 10;
+		$catename='全部';
+		$where=true;
+		if($cateid){
+			$catename=Db::name('cate')->where('id',$cateid)->value('catename');
+			$where=[
+				'cateid'=>$cateid
+			];
+		}
+		$list=Db::name('article')->where('isopen',1)->where($where)->where('title','like','%'.$key.'%')->paginate($num,false,['query'=>request()->param()]);
+		$page = $list->render();
+		// 模板变量赋值
+		$this->assign('list', $list);
+		$this->assign('page', $page);
+		return $this->fetch('',[
+			'key'=>$key,
+			'catename'=>$catename,
+		]);
 	}
 	public function show()
 	{

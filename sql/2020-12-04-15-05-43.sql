@@ -1,8 +1,8 @@
 /*
 MySQL Database Backup Tools
 Server:127.0.0.1:3306
-Database:thinkphpcmslite
-Data:2020-12-02 17:55:09
+Database:_lizhili_database
+Data:2020-12-04 15:05:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -204,7 +204,6 @@ INSERT INTO `lizhili_auth_rule` (`id`,`name`,`title`,`type`,`status`,`condition`
 INSERT INTO `lizhili_auth_rule` (`id`,`name`,`title`,`type`,`status`,`condition`,`fid`,`level`,`sort`) VALUES ('7','slide/all','幻灯片总权限','1','1','','0','0','0');
 INSERT INTO `lizhili_auth_rule` (`id`,`name`,`title`,`type`,`status`,`condition`,`fid`,`level`,`sort`) VALUES ('8','slide/add','添加幻灯片','1','1','','7','1','0');
 INSERT INTO `lizhili_auth_rule` (`id`,`name`,`title`,`type`,`status`,`condition`,`fid`,`level`,`sort`) VALUES ('9','slide/edit','修改幻灯片','1','1','','7','1','0');
-INSERT INTO `lizhili_auth_rule` (`id`,`name`,`title`,`type`,`status`,`condition`,`fid`,`level`,`sort`) VALUES ('10','comment/all','评论总权限','1','1','','0','0','0');
 INSERT INTO `lizhili_auth_rule` (`id`,`name`,`title`,`type`,`status`,`condition`,`fid`,`level`,`sort`) VALUES ('11','message/all','留言总权限','1','1','','0','0','0');
 
 
@@ -254,7 +253,7 @@ CREATE TABLE `lizhili_cms` (
 -- Records of lizhili_cms
 -- ----------------------------
 
-INSERT INTO `lizhili_cms` (`id`,`text`,`iswo`) VALUES ('1','<p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">感谢您一年来对我们的支持和包容。为了更好的服务大家，在2018年6月份，我们全新发布了后台管理系统版本。我们的发布离不开广大用户给出的建议和意见。我们整合了更多优秀插件；优化了框架的体积。当然相比目前行业其他管理系统还有很多不足。但初心不改，实实在在把事做好，做用户最喜欢的框架。更好为客户服务。</p><p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">我们在2018年版本上面，先进行了，大量的技术更新，包括了秒杀，团购，即时通讯，购物，等等功能的扩展。然后在2019年的9月和11月份，我们又进行了重构，大量的精简了原始代码，把原始的一些插件进行了替换，删除没有必要的程序增加水印缩略图等功能，速度是2018年第一版的3倍以上。从最早网站开发，到现在我们已经经历过了6个年头，我们经历过的项目数百个，每一次修改后台我们都抱着不忘初心的态度，努力的写好每一句代码，希望我们的努力，可以得到您的认可。你们的肯定就是对我们最大支持！</p><p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">2020年，添加了广告和水印的判断，修复了bug。添加了数据备份还原功能。添加了关闭网站后的302重定向。5月份添加了后台动态修改菜单功能。6月修改了sql逻辑，添加了广告分类等等。添加了商品的操作。添加了大量的功能。7月修改分销的逻辑，已经发现的bug。8月份添加面包屑等前台功能。模仿dede添加多级循环等标签！前台小程序页面请联系我，lizhilimaster@163.com。</p><p><br/></p>','1');
+INSERT INTO `lizhili_cms` (`id`,`text`,`iswo`) VALUES ('1','<p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">感谢您一年来对我们的支持和包容。为了更好的服务大家，在2018年6月份，我们全新发布了后台管理系统版本。我们的发布离不开广大用户给出的建议和意见。我们整合了更多优秀插件；优化了框架的体积。当然相比目前行业其他管理系统还有很多不足。但初心不改，实实在在把事做好，做用户最喜欢的框架。更好为客户服务。</p><p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">我们在2018年版本上面，先进行了，大量的技术更新，包括了秒杀，团购，即时通讯，购物，等等功能的扩展。然后在2019年的9月和11月份，我们又进行了重构，大量的精简了原始代码，把原始的一些插件进行了替换，删除没有必要的程序增加水印缩略图等功能，速度是2018年第一版的3倍以上。从最早网站开发，到现在我们已经经历过了6个年头，我们经历过的项目数百个，每一次修改后台我们都抱着不忘初心的态度，努力的写好每一句代码，希望我们的努力，可以得到您的认可。你们的肯定就是对我们最大支持！</p><p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">2020年，添加了广告和水印的判断，修复了bug。添加了数据备份还原功能。添加了关闭网站后的302重定向。5月份添加了后台动态修改菜单功能。6月修改了sql逻辑，添加了广告分类等等。添加了商品的操作。添加了大量的功能。7月修改分销的逻辑，已经发现的bug。8月份添加面包屑等前台功能。模仿dede添加多级循环等标签！</p><p style="overflow-wrap: break-word; margin-top: 0px; margin-bottom: 10px; padding: 0px; color: rgb(51, 51, 51); font-family: &quot;Microsoft Yahei&quot;, &quot;Hiragino Sans GB&quot;, &quot;Helvetica Neue&quot;, Helvetica, tahoma, arial, &quot;WenQuanYi Micro Hei&quot;, Verdana, sans-serif, 宋体; font-size: 14px; white-space: normal; text-indent: 20px;">2020年12月，进行大量修改bug，更新了下载，搜索，SEO，等等功能，更新手册！如果有使用上面问题可以联系我，lizhilimaster@163.com。</p><p><br/></p>','1');
 
 
 -- ----------------------------
@@ -282,6 +281,37 @@ INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('5','t_w','300'
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('6','t_h','300','缩略图高');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('7','shui_zihao','18','水印字号');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('8','shui_yanse','#ffffff','水印颜色');
+
+
+-- ----------------------------
+-- Table structure for lizhili_download
+-- ----------------------------
+
+DROP TABLE IF EXISTS `lizhili_download`;
+CREATE TABLE `lizhili_download` (
+  `id` mediumint(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(60) DEFAULT NULL,
+  `keyword` varchar(10) DEFAULT NULL,
+  `desc` varchar(255) DEFAULT NULL,
+  `author` varchar(255) DEFAULT NULL,
+  `pic` varchar(160) DEFAULT NULL,
+  `text` text,
+  `state` smallint(6) unsigned DEFAULT '0',
+  `click` mediumint(9) DEFAULT '0',
+  `zan` mediumint(9) DEFAULT '0',
+  `time` int(10) DEFAULT NULL,
+  `faid` int(11) DEFAULT '0' COMMENT '发布者id',
+  `laiyuan` varchar(255) DEFAULT NULL,
+  `click_wai` mediumint(9) DEFAULT '0' COMMENT '展示数据',
+  `isopen` tinyint(1) DEFAULT '1',
+  `file` varchar(255) DEFAULT NULL COMMENT '下载地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lizhili_download
+-- ----------------------------
+
 
 
 -- ----------------------------
@@ -399,7 +429,7 @@ CREATE TABLE `lizhili_pilot_list` (
   `isopen` tinyint(1) DEFAULT '1',
   `pn_id` int(11) DEFAULT '1' COMMENT '头部导航',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COMMENT='后台侧面导航';
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COMMENT='后台侧面导航';
 
 -- ----------------------------
 -- Records of lizhili_pilot_list
@@ -436,6 +466,8 @@ INSERT INTO `lizhili_pilot_list` (`id`,`sort`,`name`,`fid`,`icon`,`url`,`isopen`
 INSERT INTO `lizhili_pilot_list` (`id`,`sort`,`name`,`fid`,`icon`,`url`,`isopen`,`pn_id`) VALUES ('44','0','说明管理','31','','pilot/cms','1','1');
 INSERT INTO `lizhili_pilot_list` (`id`,`sort`,`name`,`fid`,`icon`,`url`,`isopen`,`pn_id`) VALUES ('50','5','SEO优化','0','&#xe72b;','没有地址','1','1');
 INSERT INTO `lizhili_pilot_list` (`id`,`sort`,`name`,`fid`,`icon`,`url`,`isopen`,`pn_id`) VALUES ('51','0','生成地图','50','','map/index','1','1');
+INSERT INTO `lizhili_pilot_list` (`id`,`sort`,`name`,`fid`,`icon`,`url`,`isopen`,`pn_id`) VALUES ('52','2','下载管理','0','&#xe641;','','1','2');
+INSERT INTO `lizhili_pilot_list` (`id`,`sort`,`name`,`fid`,`icon`,`url`,`isopen`,`pn_id`) VALUES ('53','0','下载管理','52','','download/index','1','2');
 
 
 -- ----------------------------

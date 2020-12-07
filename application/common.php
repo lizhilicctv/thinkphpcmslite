@@ -50,7 +50,7 @@ function slide()
     // {/volist}
 }
 //列表页
-function lit($id=0,$num=1){
+function lit($id=0,$num=10){
 	if ($id==0) {
 	    return 'id必须填写！';
 	}

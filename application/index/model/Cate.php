@@ -270,12 +270,16 @@ class Cate extends Model
 		return array_reverse($cate);
 	}
 	public function lit($id,$unm){
+		if(!$page=input('page')){
+		    $page=1;
+		}
+		
 		if(config('app_debug')){
 			$lit=Db::name('article')->where('isopen',1)->where('cateid',$id)->order('state desc,time desc,id desc')->paginate($unm);
 		}else{
-			if(!$lit=Cache::get('lit'.$id)){
+			if(!$lit=Cache::get('lit'.$id.$page)){
 				$lit=Db::name('article')->where('isopen',1)->where('cateid',$id)->order('state desc,time desc,id desc')->paginate($unm);
-				Cache::set('lit'.$id,$lit,3600);
+				Cache::set('lit'.$id.$page,$lit,3600);
 			}
 		}
 		return $lit;

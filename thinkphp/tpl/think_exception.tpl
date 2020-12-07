@@ -410,9 +410,11 @@
     <?php } ?>
 
     <div class="copyright">
-        <a title="官方网站" href="http://www.thinkphp.cn">ThinkPHP</a> 
-        <span>V<?php echo \think\facade\App::version(); ?></span> 
-        <span>{ 十年磨一剑-为API开发设计的高性能框架 }</span>
+        <a style="padding: 0 15px;" title="查看手册" target="_blank" href="https://www.kancloud.cn/lizhilicctv/unicms/2057844">查看手册</a> 
+		<a style="padding: 0 15px;" title="github仓库" target="_blank" href="https://github.com/lizhilicctv">github仓库</a>
+		<a style="padding: 0 15px;" title="码云仓库" target="_blank" href="https://gitee.com/lizhiliwo">码云仓库</a>
+
+        <span>感谢您的支持</span>
     </div>
     <?php if(\think\facade\App::isDebug()) { ?>
     <script>

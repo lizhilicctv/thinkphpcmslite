@@ -23,25 +23,25 @@ class Cate extends Model
 		return $cate;
 	}
 
-	public function cateall($unid, $num, $order,$field, $where){
-		if(!is_array($unid)){
-			return 'unid 必须为数组！';
+	public function cateall($ids, $num, $unids,$order,$field, $where){
+		if(!is_array($ids) or empty($ids)){
+			return 'ids 必须为数组！';
 		}
 		if($order){
 			$order1='id asc';
 		}else{
 			$order1='id desc';
 		}
-		$id=implode("",$unid);
+		$id=implode("",$ids);
 		if(config('app_debug')){
-			$cateall=Db::name('cate')->where('fid',0)->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
+			$cateall=Db::name('cate')->where('fid',0)->where('isopen',1)->where('id','in',$ids)->where('type','in',[1,2,3])->order($order1)->field('id,catename,en_name')->select();
 			foreach($cateall as $k=>$v){
 				if($order){
 					$order='state desc,time desc,id asc';
 				}else{
 					$order='state desc,time desc,id desc';
 				}
-				$data=Db::name('cate')->where('fid',$v['id'])->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
+				$data=Db::name('cate')->where('fid',$v['id'])->where('isopen',1)->where('id','notin',$unids)->where('type','in',[1,2,3])->order($order1)->field('id,catename,en_name')->select();
 				foreach($data as $k=>$v){
 					$data[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
 				}
@@ -49,14 +49,14 @@ class Cate extends Model
 			}
 		}else{
 			if(!$cateall=Cache::get('$cateall'.$id)){
-				$cateall=Db::name('cate')->where('fid',0)->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
+				$cateall=Db::name('cate')->where('fid',0)->where('isopen',1)->where('id','in',$ids)->where('type','in',[1,2,3])->order($order1)->field('id,catename,en_name')->select();
 				foreach($cateall as $k=>$v){
 					if($order){
 						$order='state desc,time desc,id asc';
 					}else{
 						$order='state desc,time desc,id desc';
 					}
-					$data=Db::name('cate')->where('fid',$v['id'])->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
+					$data=Db::name('cate')->where('fid',$v['id'])->where('isopen',1)->where('id','notin',$unids)->where('type','in',[1,2,3])->order($order1)->field('id,catename,en_name')->select();
 					foreach($data as $k=>$v){
 						$data[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
 					}
@@ -67,37 +67,45 @@ class Cate extends Model
 		}
 		return $cateall;
 	}
-	public function catelist($unid, $num, $order,$field, $where){
-		if(!is_array($unid)){
-			return 'unid 必须为数组！';
+	public function catelist($ids, $num, $order,$field, $where){
+		if(!is_array($ids) or empty($ids)){
+			return 'ids 必须为数组！';
 		}
-		$id=implode("",$unid);
+		$id=implode("",$ids);
 		if($order){
 			$order1='id asc';
 		}else{
 			$order1='id desc';
 		}
-	
+		$catelist=[];
 		if(config('app_debug')){
-			$catelist=Db::name('cate')->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
-			foreach($catelist as $k=>$v){
+			foreach ($ids as $k => $v) {
 				if($order){
 					$order='state desc,time desc,id asc';
 				}else{
 					$order='state desc,time desc,id desc';
 				}
-				$catelist[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
+				$res=Db::name('article')->where('isopen',1)->where('cateid',$v)->where($where)->field($field)->limit($num)->order($order)->select();
+				foreach ($res as $k1 => $v1) {
+					$res[$k1]['catename']=Db::name('cate')->where('id',$v1['cateid'])->value('catename');
+					$res[$k1]['en_name']=Db::name('cate')->where('id',$v1['cateid'])->value('en_name');
+				}
+				$catelist=array_merge($catelist,$res);
 			}
 		}else{
 			if(!$catelist=Cache::get('catelist'.$id)){
-				$catelist=Db::name('cate')->where('isopen',1)->where('id','notin',$unid)->where('type','in',[1,2])->order($order1)->field('id,catename,en_name')->select();
-				foreach($catelist as $k=>$v){
+				foreach ($ids as $k => $v) {
 					if($order){
 						$order='state desc,time desc,id asc';
 					}else{
 						$order='state desc,time desc,id desc';
 					}
-					$catelist[$k]['list']=Db::name('article')->where('isopen',1)->where('cateid',$v['id'])->where($where)->field($field)->limit($num)->order($order)->select();
+					$res=Db::name('article')->where('isopen',1)->where('cateid',$v)->where($where)->field($field)->limit($num)->order($order)->select();
+					foreach ($res as $k1 => $v1) {
+						$res[$k1]['catename']=Db::name('cate')->where('id',$v1['cateid'])->value('catename');
+						$res[$k1]['en_name']=Db::name('cate')->where('id',$v1['cateid'])->value('en_name');
+					}
+					$catelist=array_merge($catelist,$res);
 				}
 				Cache::set('catelist'.$id,$catelist,3600);
 			}
@@ -257,7 +265,6 @@ class Cate extends Model
 				$cate[]=$wo;
 			}
 		}
-		
 		if($action=='show'){
 			$id=Db::name('article')->where('id',$id)->value('cateid');
 			if($wo=Db::name('cate')->where('id',$id)->field('id,fid,catename')->find()){
@@ -273,7 +280,6 @@ class Cate extends Model
 		if(!$page=input('page')){
 		    $page=1;
 		}
-		
 		if(config('app_debug')){
 			$lit=Db::name('article')->where('isopen',1)->where('cateid',$id)->order('state desc,time desc,id desc')->paginate($unm);
 		}else{
@@ -289,7 +295,6 @@ class Cate extends Model
 		if(!is_array($idarr)){
 			return 'id 必须为数组！';
 		}
-		
 		if($order){
 			$order='state desc,time desc,id asc';
 		}else{

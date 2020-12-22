@@ -14,7 +14,7 @@ class Install extends Controller
 	
     public function index1()
     {
-		$file=env('config_path').'install.txt';
+		$file=env('root_path').'tpl/'.'install.txt';
 		if(file_get_contents($file)!='install'){
 			header("Location:/404.html");
 			//确保重定向后，后续代码不会被执行
@@ -24,7 +24,7 @@ class Install extends Controller
     }
 	public function index()
 	{
-		$file=env('config_path').'install.txt';
+		$file=env('root_path').'tpl/'.'install.txt';
 		if(file_get_contents($file)!='install'){
 			header("Location:/404.html");
 			//确保重定向后，后续代码不会被执行
@@ -74,9 +74,9 @@ class Install extends Controller
 			
 			if($wo['code']==1){
 				//修改数据配置
-				$file=env('config_path').'install.txt';
+				$file=env('root_path').'tpl/'.'install.txt';
 				file_put_contents($file,'lock'); 
-				$app=env('config_path').'database.php';
+				$app=env('root_path').'tpl/'.'database.php';
 				$apphtml=file_get_contents($app);
 				
 				$apphtml=str_replace('_lizhili_database',$data["database"],$apphtml);

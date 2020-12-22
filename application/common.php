@@ -244,19 +244,19 @@ function cate($id=0, $num=3, $offset=0,$order=false,$field='*', $where=true)
     // {$vo.id}
     // {/volist}
 }
-function cateall($unid=[], $num=3,$order=false,$field='*', $where=true)
+function cateall($ids=[], $num=3,$unids=[],$order=false,$field='*', $where=true)
 {
-    return model('cate')->cateall($unid, $num, $order,$field, $where);
-    //使用方法 //两层循环 //第一个是减去操作
-    // {volist name=":cateall([]$unid,$num,$order,$field,$where)" id="vo"}
+    return model('cate')->cateall($ids, $num,$unids, $order,$field, $where);
+    //使用方法 //两层循环 用于首页大循环
+    // {volist name=":cateall([]$ids,$num,[]$unids,$order,$field,$where)" id="vo"}
     // {$vo.id}
     // {/volist}
 }
-function catelist($unid=[], $num=3,$order=false,$field='*', $where=true)
+function catelist($ids=[], $num=3,$order=false,$field='*', $where=true)
 {
-    return model('cate')->catelist($unid, $num, $order,$field, $where);
-    //使用方法 //平铺展开 //第一个是减去操作
-    // {volist name=":catelist([]$unid,$num,$order,$field,$where)" id="vo"}
+    return model('cate')->catelist($ids, $num, $order,$field, $where);
+    //使用方法  同时调用多个栏目
+    // {volist name=":catelist([]$ids,$num,$order,$field,$where)" id="vo"}
     // {$vo.id}
     // {/volist}
 }

@@ -36,10 +36,10 @@ function jiequ($data, $num=50)
 function slide()
 {
     if (config('app_debug')) {
-        $slide=db('slide')->field('title,url,img')->where('isopen',1)->order('sort desc,id desc')->select();
+        $slide=db('slide')->field('title,url,img,desc')->where('isopen',1)->order('sort desc,id desc')->select();
     } else {
         if (!$slide=cache('slide')) {
-            $slide=db('slide')->field('title,url,img')->where('isopen',1)->order('sort desc,id desc')->select();
+            $slide=db('slide')->field('title,url,img,desc')->where('isopen',1)->order('sort desc,id desc')->select();
             cache('slide', $slide, 3600);
         }
     }

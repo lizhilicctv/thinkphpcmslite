@@ -7,6 +7,12 @@ class Cate extends Model
 {
 	//如果表名和文件名不是对应的，用下面代码修改
 	public function cate($id,$num,$offset,$order,$field,$where){
+		if($id){
+			$ids=Db::name('cate')->where('fid',$id)->where('type','in',[1,2,3])->column('id');
+			$ids[]=$id;
+		}else{
+			$ids=Db::name('cate')->where('type','in',[1,2,3])->column('id');
+		}
 		if($order){
 			$order='state desc,time desc,id asc';
 		}else{

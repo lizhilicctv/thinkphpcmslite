@@ -235,9 +235,6 @@ function suiimg($id=0, $num=3,  $field='*', $where=true) //随机读取文章,�
 }
 function cate($id=0, $num=3, $offset=0,$order=false,$field='*', $where=true)
 {
-    if ($id==0) {
-        return 'id必须填写！';
-    }
     return model('cate')->cate($id, $num, $offset,$order,$field, $where);
     //使用方法 //单个栏目
     // {volist name=":cate($id,$num,$offset,$order,$field,$where)" id="vo"}

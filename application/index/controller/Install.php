@@ -11,17 +11,6 @@ class Install extends Controller
         //确保重定向后，后续代码不会被执行
         exit;
     }
-	
-    public function index1()
-    {
-		$file=env('root_path').'tpl/'.'install.txt';
-		if(file_get_contents($file)!='install'){
-			header("Location:/404.html");
-			//确保重定向后，后续代码不会被执行
-			exit;
-		}
-		return $this->fetch();
-    }
 	public function index()
 	{
 		$file=env('root_path').'tpl/'.'install.txt';
@@ -74,15 +63,17 @@ class Install extends Controller
 			
 			if($wo['code']==1){
 				//修改数据配置
-				$file=env('root_path').'tpl/'.'install.txt';
-				file_put_contents($file,'lock'); 
-				$app=env('root_path').'tpl/'.'database.php';
+				
+				$app=env('config_path').'database.php';
 				$apphtml=file_get_contents($app);
 				
 				$apphtml=str_replace('_lizhili_database',$data["database"],$apphtml);
 				$apphtml=str_replace('_lizhili_username',$data["username"],$apphtml);
 				$apphtml=str_replace('_lizhili_password',$data["password"],$apphtml);
 				file_put_contents($app,$apphtml); 
+				
+				$file=env('root_path').'tpl/'.'install.txt';
+				file_put_contents($file,'lock'); 
 				 $this->success('还原成功','index/index');
 			}
 			 $this->error('还原数据库失败');

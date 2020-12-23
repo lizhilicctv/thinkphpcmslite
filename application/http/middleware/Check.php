@@ -8,7 +8,7 @@ class Check
 {
     public function handle($request, \Closure $next)
     {
-		$file=env('config_path').'install.txt';
+		$file=env('root_path').'tpl/'.'install.txt';
 		if(!file_exists($file)){
 		    file_put_contents($file,'install'); 
 		}

@@ -13,6 +13,15 @@ class Check
 		    file_put_contents($file,'install'); 
 		}
 		if(file_get_contents($file)=='install' and request()->controller()!="Install"){
+			$file=env('root_path').'public/'.'.htaccess';
+			file_put_contents($file,'<IfModule mod_rewrite.c>
+  Options +FollowSymlinks -Multiviews
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+</IfModule>'); 
 			return redirect('/install/index.html');
 		}
 	   if(request()->controller()!=="Notify" and request()->controller()!=="Install"){ //这个是微信支付的回调，以后回调都写在这个控制器里面的了

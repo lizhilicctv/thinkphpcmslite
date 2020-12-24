@@ -59,8 +59,14 @@ class Index extends Base
     }
 	public function cate()
 	{
+		
+		//拦截远程跳转
+		$cate=Db::name('cate')->find(\input('id'));
+		if($cate['type']==4 and isset($cate['url'])){
+			$this->redirect($cate['url'],302);
+		}
+		$html=$cate['catehtml'];
 		$this->assign('id', input('id'));
-		$html=Db::name('cate')->where('id',\input('id'))->value('catehtml');
 		if(substr($html,-5,5)=='.html'){
 			$html=substr($html,0,strlen($html)-5);
 		}

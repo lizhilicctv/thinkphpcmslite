@@ -54,6 +54,10 @@ class Index extends Base
 	}
     public function index()
     {
+		
+		$wo=$this->curl('http://biaotian.net/');
+		dump($wo);
+		die;
 		//这里请使用缓存
 		return $this->fetch();
     }

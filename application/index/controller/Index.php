@@ -21,6 +21,27 @@ class Index extends Base
 		//使用缓存
 		$action=request()->action();
 		$id=input('id');
+		if($action=='index'){
+			if(config('app_debug')){
+				$dataindex=[
+					'catename'=>'首页',
+					'en_name'=>'index',
+					'fid'=>0,
+					'cateid'=>0
+				];
+			}else{
+				if(!$dataindex=Cache::get('dataindex'.$id)){
+					$dataindex=[
+						'catename'=>'首页',
+						'en_name'=>'index',
+						'fid'=>0,
+						'cateid'=>0
+					];
+					Cache::set('dataindex',$dataindex,3600);
+				}
+			}
+			$this->assign('data', $dataindex);
+		}
 		if($action=='cate'){
 			if(config('app_debug')){
 				$datacate=Db::name('cate')->find($id);
@@ -30,14 +51,25 @@ class Index extends Base
 					Cache::set('datacate'.$id,$datacate,3600);
 				}
 			}
+			$datacate['cateid']=$id;
 			$this->assign('data', $datacate);
 		}
 		if($action=='show'){
 			if(config('app_debug')){
 				$dataarticle=Db::name('article')->find($id);
+				$datacate=Db::name('cate')->find($dataarticle['cateid']);
+				$dataarticle['catename']=$datacate['catename'];
+				$dataarticle['en_name']=$datacate['en_name'];
+				$dataarticle['fid']=$datacate['fid'];
+				$dataarticle['cateid']=$datacate['id'];
 			}else{
 				if(!$dataarticle=Cache::get('dataarticle'.$id)){
 					$dataarticle=Db::name('article')->find($id);
+					$datacate=Db::name('cate')->find($dataarticle['cateid']);
+					$dataarticle['catename']=$datacate['catename'];
+					$dataarticle['en_name']=$datacate['en_name'];
+					$dataarticle['fid']=$datacate['fid'];
+					$dataarticle['cateid']=$datacate['id'];
 					Cache::set('dataarticle'.$id,$dataarticle,3600);
 				}
 			}

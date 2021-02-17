@@ -113,7 +113,7 @@ class Admin extends Conn
 	//清除缓存
 	public function cahe(){
 		if(\Cache::clear()){
-			return $this->success('清除缓存成功',url('admin/index',['st'=>1]));
+			return $this->success('清除缓存成功',url('index/main'));
 		}else{
 			return  $this->error('清除缓存失败了');
 		}

@@ -28,7 +28,11 @@ function tonow($data)
 }
 function jiequ($data, $num=50)
 {
-    return mb_substr($data, 0, $num);
+	if(mb_strlen($data) > $num){
+		return mb_substr($data, 0, $num).'...';
+	}else{
+		return mb_substr($data, 0, $num);
+	}
 }
 //下面自己编写的方法
 //获取幻灯片
@@ -314,8 +318,23 @@ function breadcrumb($fen=''){ //面包屑导航
 	}
 	if($action=='show'){
 		$html.="<li class='active'>正文</li>";
+	}else{
+		$html=substr($html, 0, -(strlen($fen)));
 	}
 	$html.='</ul>';
+	if($fen){
+		$sty= <<<___
+<style type="text/css">
+	.breadcrumb > li + li:before{
+		content:none
+	}
+	.breadcrumb li{
+		padding: 0 8px;
+	}
+</style>
+___;
+$html.=$sty;
+	}
 	return $html;
 	// 使用方法
 	// {:breadcrumb(' > ')} boot默认不需要传值

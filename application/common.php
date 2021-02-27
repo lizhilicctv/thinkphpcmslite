@@ -277,16 +277,16 @@ function friend()
     // {$vo.id}
     // {/volist}
 }
-function nav()
-{
+function nav($fid=0)
+{ 
     if (config('app_debug')) {
-        $cate = db('cate')->where('fid', 0)->field('id,catename,en_name,type,url')->where('isopen', 1)->order('sort asc')->select();
+        $cate = db('cate')->where('fid', $fid)->field('id,catename,en_name,type,url')->where('isopen', 1)->order('sort asc')->select();
         foreach ($cate as $k=>$v) {
             $cate[$k]['zi']=db('cate')->where('fid', $v['id'])->field('id,catename,en_name,type,url')->order('sort asc')->where('isopen', 1)->select();
         }
     } else {
         if (!$cate=cache('cate')) {
-            $cate = db('cate')->where('fid', 0)->field('id,catename,en_name,type,url')->where('isopen', 1)->order('sort asc')->select();
+            $cate = db('cate')->where('fid', $fid)->field('id,catename,en_name,type,url')->where('isopen', 1)->order('sort asc')->select();
             foreach ($cate as $k=>$v) {
                 $cate[$k]['zi']=db('cate')->where('fid', $v['id'])->field('id,catename,en_name,type,url')->order('sort asc')->where('isopen', 1)->select();
             }

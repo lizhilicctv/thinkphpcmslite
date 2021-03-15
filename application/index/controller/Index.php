@@ -145,15 +145,15 @@ class Index extends Base
 		
 		$shang=Db::name('article')->where('id','<',$id)->where('cateid',$article['cateid'])->order('id desc')->find();
 		if($shang){
-			$shang="< a href='".url('index/show',['id'=>$shang['id']])."'>".$shang['title']."</ a>";
+			$shang="<a href='".url('index/show',['id'=>$shang['id']])."'>".$shang['title']."</ a>";
 		}else{
-			$shang="< a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+			$shang="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
 		}
 		$xia=Db::name('article')->where('id','>',$id)->where('cateid',$article['cateid'])->order('id asc')->find();
 		if($xia){
-			$xia="< a href='".url('index/show',['id'=>$xia['id']])."'>".$xia['title']."</ a>";
+			$xia="<a href='".url('index/show',['id'=>$xia['id']])."'>".$xia['title']."</ a>";
 		}else{
-			$xia="< a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+			$xia="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
 		}
 		$this->assign([
 			'shang'=>$shang,

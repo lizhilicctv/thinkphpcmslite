@@ -112,7 +112,7 @@ function boot($data, $time=3000,$indicators=false,$control=false)
 	
     //{:boot($ad.index,5000,true,true)}
 }
-function SuperSlide($data=null,$time=3000,$autoPlay=true,$next=false){
+function SuperSlide($data=null,$time=3000,$autoPlay=true,$next=false,$num=false,$color='#f00'){
 	$name='a'.uniqid();
 		$shu='';
 		$shudian='';

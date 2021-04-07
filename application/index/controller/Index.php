@@ -51,12 +51,28 @@ class Index extends Base
 					Cache::set('datacate'.$id,$datacate,3600);
 				}
 			}
+			if(!$datacate){
+				header("Location:/404.html");
+				die;
+			}
 			$datacate['cateid']=$id;
 			$this->assign('data', $datacate);
+			
+			//这里做跳转判断
+			if($datacate['tiao_type']==1){
+				$this->redirect('index/cate', ['id' =>$datacate['tiao_id'] ]);
+			}
+			if($datacate['tiao_type']==2){
+				$this->redirect('index/show', ['id' =>$datacate['tiao_id'] ]);
+			}
 		}
 		if($action=='show'){
 			if(config('app_debug')){
 				$dataarticle=Db::name('article')->find($id);
+				if(!$dataarticle){
+					header("Location:/404.html");
+					die;
+				}
 				$datacate=Db::name('cate')->find($dataarticle['cateid']);
 				$dataarticle['catename']=$datacate['catename'];
 				$dataarticle['en_name']=$datacate['en_name'];
@@ -65,6 +81,10 @@ class Index extends Base
 			}else{
 				if(!$dataarticle=Cache::get('dataarticle'.$id)){
 					$dataarticle=Db::name('article')->find($id);
+					if(!$dataarticle){
+						header("Location:/404.html");
+						die;
+					}
 					$datacate=Db::name('cate')->find($dataarticle['cateid']);
 					$dataarticle['catename']=$datacate['catename'];
 					$dataarticle['en_name']=$datacate['en_name'];
@@ -136,28 +156,35 @@ class Index extends Base
 		$id=input('id');
 		$article=Db::name('article')->find($id);
 		if(!$article){
-			return '文章显示错误！';
+			header("Location:/404.html");
+			die;
 		}
 		Db::name('article')->where('id',$article['id'])->update([
 			'click_wai'=>$article['click_wai']+1,
 			'click'=>$article['click']+1,
 		]);
 		
-		$shang=Db::name('article')->where('id','<',$id)->where('cateid',$article['cateid'])->order('id desc')->find();
-		if($shang){
-			$shang="<a href='".url('index/show',['id'=>$shang['id']])."'>".$shang['title']."</ a>";
+		$shang1=Db::name('article')->where('id','<',$id)->where('cateid',$article['cateid'])->order('id desc')->find();
+		if($shang1){
+			$shang="<a href='".url('index/show',['id'=>$shang1['id']])."'>".$shang1['title']."</ a>";
+			$shangurl=url('index/show',['id'=>$shang1['id']]);
 		}else{
 			$shang="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+			$shangurl=url('index/cate',['id'=>$article['cateid']]);
 		}
-		$xia=Db::name('article')->where('id','>',$id)->where('cateid',$article['cateid'])->order('id asc')->find();
-		if($xia){
-			$xia="<a href='".url('index/show',['id'=>$xia['id']])."'>".$xia['title']."</ a>";
+		$xia1=Db::name('article')->where('id','>',$id)->where('cateid',$article['cateid'])->order('id asc')->find();
+		if($xia1){
+			$xia="<a href='".url('index/show',['id'=>$xia1['id']])."'>".$xia1['title']."</ a>";
+			$xiaurl=url('index/show',['id'=>$xia1['id']]);
 		}else{
 			$xia="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+			$xiaurl=url('index/cate',['id'=>$article['cateid']]);
 		}
 		$this->assign([
 			'shang'=>$shang,
-			'xia'=>$xia
+			'xia'=>$xia,
+			'shangurl'=>$shangurl,
+			'xiaurl'=>$xiaurl
 		]);
 		
 		

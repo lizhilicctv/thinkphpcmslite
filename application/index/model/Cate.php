@@ -22,7 +22,7 @@ class Cate extends Model
             $order='state desc,time desc,id desc';
         }
         if (config('app_debug')) {
-            $cate=Db::name('article')->where('isopen', 1)->where('cateid', $id)->where($where)->field($field)->limit($offset, $num)->order($order)->select();
+            $cate=Db::name('article')->where('isopen', 1)->where('cateid','in',$ids)->where($where)->field($field)->limit($offset, $num)->order($order)->select();
 			foreach($cate as $k=>$v){
 				if (!$v['pic']) {
 				    $cate[$k]['pic']=Db::name('article_img')->where('aid', $v['id'])->value('pic');
@@ -30,7 +30,7 @@ class Cate extends Model
 			}
         } else {
             if (!$cate=Cache::get('cate'.$id)) {
-                $cate=Db::name('article')->where('isopen', 1)->where('cateid', $id)->where($where)->field($field)->limit($offset, $num)->order($order)->select();
+                $cate=Db::name('article')->where('isopen', 1)->where('cateid','in',$ids)->where($where)->field($field)->limit($offset, $num)->order($order)->select();
 				foreach($cate as $k=>$v){
 					if (!$v['pic']) {
 					    $cate[$k]['pic']=Db::name('article_img')->where('aid', $v['id'])->value('pic');

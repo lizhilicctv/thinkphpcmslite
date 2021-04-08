@@ -277,7 +277,7 @@ function friend()
     // {$vo.id}
     // {/volist}
 }
-function nav($fid=0,$type=false)
+function nav($fid=0,$type=false)//第二参数，是否平铺
 { 
     if (config('app_debug')) {
 		if($type){

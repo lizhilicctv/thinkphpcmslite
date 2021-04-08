@@ -149,6 +149,23 @@ class Download extends Conn
             if (input('desc')=='') {
                 $data['desc']=mb_substr(preg_replace('/\&nbsp;/', '', strip_tags(input('text'))), 0, 80);
             }
+			
+			preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/", $data["text"], $arr);
+			$config=Db::name('config')->column('value', 'key');
+			//压缩图片
+			foreach ($arr[1] as $k=>$v) {
+			    if (substr($v, 0, 4)!='http') {
+			        $newarr=getimagesize(substr($v, 1));
+				   if ($config["is_ya"] ==1 and $newarr[0] >$config["ya_w"]) {
+				      $image = \think\Image::open(substr($v, 1));
+				      $h=$config["ya_w"]*$newarr[1]/$newarr[0];
+				      $image->thumb($config['ya_w'],$h)->save(substr($v, 1));
+							
+				   }
+			    }
+			}
+			
+			
             $data['faid']=session('uid');
             if (Db::name('download')->strict(false)->insertGetId($data)) {
                 return '<script>alert("你好，添加成功了！");parent.location.reload()</script>';
@@ -191,7 +208,21 @@ class Download extends Conn
 				$li=strtr($info->getSaveName(), " \ ", " / ");
 				$data['file']='/download/'.$li;
 			}
-         
+			
+			preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/", $data["text"], $arr);
+			$config=Db::name('config')->column('value', 'key');
+			//压缩图片
+			foreach ($arr[1] as $k=>$v) {
+			    if (substr($v, 0, 4)!='http') {
+			        $newarr=getimagesize(substr($v, 1));
+				   if ($config["is_ya"] ==1 and $newarr[0] >$config["ya_w"]) {
+				      $image = \think\Image::open(substr($v, 1));
+				      $h=$config["ya_w"]*$newarr[1]/$newarr[0];
+				      $image->thumb($config['ya_w'],$h)->save(substr($v, 1));
+							
+				   }
+			    }
+			}
             $res=model('download')->allowField(true)->save($data, ['id' => input('id')]);
             if ($res) {
                 return $this->success('修改成功', url('download/index'));

@@ -11,9 +11,6 @@
 	<div class="Hui-article">
 		<article class="cl pd-20">
 			<form action="" method="post" class="form form-horizontal" enctype="multipart/form-data" id="form-article-add">
-
-
-
 				<div style="border: 1px solid #D0D0D0;padding-bottom: 20px;margin: 0 20px 20px 20px;border-radius: 20px;background: #fefefe">
 					<div class="row cl">
 						<label class="form-label col-xs-4 col-sm-2">
@@ -90,12 +87,12 @@
 						<label class="form-label col-xs-4 col-sm-2" style="font-weight: 600;">开启缩略图设置：</label>
 						<div class="formControls col-xs-8 col-sm-9 skin-minimal">
 							<div class="radio-box">
-								<input type="radio" value="1" {if $data.thumbnail==1 } checked="checked" {/if} id="radio-31" name="thumbnail">
-								<label for="radio-31">开启</label>
+								<label ><input type="radio" value="1" {if $data.thumbnail==1 } checked="checked" {/if}  name="thumbnail">
+								开启</label>
 							</div>
 							<div class="radio-box">
-								<input type="radio" value="0" {if $data.thumbnail==0 } checked="checked" {/if} id="radio-32" name="thumbnail">
-								<label for="radio-32">关闭</label>
+								<label><input type="radio" value="0" {if $data.thumbnail==0 } checked="checked" {/if}  name="thumbnail">
+								关闭</label>
 							</div>
 						</div>
 					</div>
@@ -109,9 +106,38 @@
 							px
 						</div>
 					</div>
-
 				</div>
-
+				
+				<div style="border: 1px solid #D0D0D0;padding-bottom: 20px;margin: 0 20px  20px 20px;border-radius: 20px;background: #fefefe">
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2">
+							<h3>图片压缩</h3>
+						</label>
+						<div class="formControls col-xs-8 col-sm-9" style="color: #31B0D5;text-align: left;line-height: 50px;padding-top: 10px;">开启后上传的图片宽度不能大于设置大小，否则会被自动压缩到，最大宽度！<b>远程图片使用静态加速或者禁止转载，设置大小不生效。</b><b style="color: red;">目前只实现了文章和下载内容压缩！</b></div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2" style="font-weight: 600;">开启图片压缩设置：</label>
+						<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+							<div class="radio-box">
+								<label><input type="radio" value="1" {if $data.is_ya==1 } checked="checked" {/if}  name="is_ya">
+								开启</label>
+							</div>
+							<div class="radio-box">
+								<label><input type="radio" value="0" {if $data.is_ya==0 } checked="checked" {/if}  name="is_ya">
+								关闭</label>
+							</div>
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-2" style="font-weight: 600;">压缩后图片大小：</label>
+						<div class="formControls col-xs-8 col-sm-9 ">
+							缩略图宽: <input type="number" class="input-text" value="{$data.ya_w}" placeholder="请填写压缩图片宽" name="ya_w" style="width: 30%;">
+							px
+							
+						</div>
+					</div>
+				
+				</div>
 
 				<div class="row cl">
 					<div class="col-xs-8 col-sm-9 col-xs-offset-2 col-sm-offset-1">

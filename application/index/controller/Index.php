@@ -130,7 +130,7 @@ class Index extends Base
 	}
 	public function search()
 	{
-		$key=input('key');
+		$keyword=input('key');
 		$cateid=input('cateid');
 		$num=input('num') ?? 10;
 		$catename='全部';
@@ -141,13 +141,13 @@ class Index extends Base
 				'cateid'=>$cateid
 			];
 		}
-		$list=Db::name('article')->where('isopen',1)->where($where)->where('title','like','%'.$key.'%')->paginate($num,false,['query'=>request()->param()]);
+		$list=Db::name('article')->where('isopen',1)->where($where)->where('title','like','%'.$keyword.'%')->paginate($num,false,['query'=>request()->param()]);
 		$page = $list->render();
 		// 模板变量赋值
 		$this->assign('list', $list);
 		$this->assign('page', $page);
 		return $this->fetch('',[
-			'key'=>$key,
+			'keyword'=>$keyword,
 			'catename'=>$catename,
 		]);
 	}
@@ -166,18 +166,18 @@ class Index extends Base
 		
 		$shang1=Db::name('article')->where('id','<',$id)->where('cateid',$article['cateid'])->order('id desc')->find();
 		if($shang1){
-			$shang="<a href='".url('index/show',['id'=>$shang1['id']])."'>".$shang1['title']."</ a>";
+			$shang="<a href='".url('index/show',['id'=>$shang1['id']])."'>".$shang1['title']."</a>";
 			$shangurl=url('index/show',['id'=>$shang1['id']]);
 		}else{
-			$shang="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+			$shang="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</a>";
 			$shangurl=url('index/cate',['id'=>$article['cateid']]);
 		}
 		$xia1=Db::name('article')->where('id','>',$id)->where('cateid',$article['cateid'])->order('id asc')->find();
 		if($xia1){
-			$xia="<a href='".url('index/show',['id'=>$xia1['id']])."'>".$xia1['title']."</ a>";
+			$xia="<a href='".url('index/show',['id'=>$xia1['id']])."'>".$xia1['title']."</a>";
 			$xiaurl=url('index/show',['id'=>$xia1['id']]);
 		}else{
-			$xia="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</ a>";
+			$xia="<a href='".url('index/cate',['id'=>$article['cateid']])."'>返回列表</a>";
 			$xiaurl=url('index/cate',['id'=>$article['cateid']]);
 		}
 		$this->assign([

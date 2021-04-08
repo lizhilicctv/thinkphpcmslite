@@ -55,7 +55,6 @@ class Cate extends Model
         $id=implode("", $ids);
         if (config('app_debug')) {
             $cateall=Db::name('cate')->where('fid', 0)->where('isopen', 1)->where('id', 'in', $ids)->where('type', 'in', [1,2,3])->order($order1)->field('id,catename,en_name')->select();
-			dump($cateall);
             foreach ($cateall as $k=>$v) {
                 if ($order) {
                     $order='state desc,time desc,id asc';
@@ -252,7 +251,6 @@ class Cate extends Model
                 Cache::set('sui'.$id, $sui, 3600);
             }
         }
-        
         return $sui;
     }
     public function hotimg($id, $num, $offset, $order, $field, $where)

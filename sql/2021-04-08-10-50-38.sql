@@ -2,7 +2,7 @@
 MySQL Database Backup Tools
 Server:127.0.0.1:3306
 Database:_lizhili_database
-Data:2021-02-17 21:17:20
+Data:2021-04-08 10:50:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -228,6 +228,8 @@ CREATE TABLE `lizhili_cate` (
   `url` varchar(255) DEFAULT NULL,
   `catehtml` varchar(255) DEFAULT NULL COMMENT '栏目模版',
   `showhtml` varchar(255) DEFAULT NULL COMMENT '详情模版',
+  `tiao_type` tinyint(1) DEFAULT '0' COMMENT '1代表栏目，2代表文章',
+  `tiao_id` int(11) DEFAULT '0' COMMENT '跳转的id',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -267,7 +269,7 @@ CREATE TABLE `lizhili_config` (
   `value` varchar(255) DEFAULT NULL,
   `shuo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of lizhili_config
@@ -277,10 +279,12 @@ INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('1','watermark'
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('2','shui_weizhi','9','水印位置具体看手册');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('3','shui_neirong','李志立 lizhilimaster@163.com','水印内容');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('4','thumbnail','0','缩率图');
-INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('5','t_w','300','缩略图宽');
+INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('5','t_w','10001','缩略图宽');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('6','t_h','300','缩略图高');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('7','shui_zihao','18','水印字号');
 INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('8','shui_yanse','#ffffff','水印颜色');
+INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('9','is_ya','1','是否开启压缩图片');
+INSERT INTO `lizhili_config` (`id`,`key`,`value`,`shuo`) VALUES ('10','ya_w','1000','压缩后的图片大小');
 
 
 -- ----------------------------

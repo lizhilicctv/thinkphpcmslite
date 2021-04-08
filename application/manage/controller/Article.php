@@ -168,6 +168,19 @@ class Article extends Conn
             } else {
                 if (isset($data['ti'])) {
                     preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/", $data["text"], $arr);
+					$config=Db::name('config')->column('value', 'key');
+					//压缩图片
+					foreach ($arr[1] as $k=>$v) {
+					    if (substr($v, 0, 4)!='http') {
+					        $newarr=getimagesize(substr($v, 1));
+						   if ($config["is_ya"] ==1 and $newarr[0] >$config["ya_w"]) {
+						      $image = \think\Image::open(substr($v, 1));
+						      $h=$config["ya_w"]*$newarr[1]/$newarr[0];
+						      $image->thumb($config['ya_w'],$h)->save(substr($v, 1));
+				
+						   }
+					    }
+					}
                     foreach ($arr[1] as $k=>$v) {
                         if (substr($v, 0, 4)!='http') {
                             $newarr=getimagesize(substr($v, 1));
@@ -183,8 +196,12 @@ class Article extends Conn
                                 }
                                 break;
                             }
+							
                         }
                     }
+					
+					
+					
                 }
             }
             
@@ -299,6 +316,21 @@ class Article extends Conn
             }
     
             $config=Db::name('config')->column('value', 'key');
+			preg_match_all("/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/", $data["text"], $arr);
+
+			//压缩图片
+			foreach ($arr[1] as $k=>$v) {
+			    if (substr($v, 0, 4)!='http') {
+			        $newarr=getimagesize(substr($v, 1));
+				   if ($config["is_ya"] ==1 and $newarr[0] >$config["ya_w"]) {
+				      $image = \think\Image::open(substr($v, 1));
+				      $h=$config["ya_w"]*$newarr[1]/$newarr[0];
+				      $image->thumb($config['ya_w'],$h)->save(substr($v, 1));
+							
+				   }
+			    }
+			}
+			
             //设置缩率图
             if ($config['thumbnail']==1 and isset($data['pic'])) {
                 $image = \think\Image::open(substr($data['pic'], 1));
@@ -339,7 +371,7 @@ class Article extends Conn
 				$img= \model('article_img');
 				$img->saveAll($list);
 				
-                return $this->success('修改成功', url('article/index'));
+                return $this->success('修改成功', url('article/index',['st'=>1]));
             } else {
                 return $this->error('修改失败了');
             }
